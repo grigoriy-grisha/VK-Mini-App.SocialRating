@@ -1,4 +1,4 @@
-export { Persik } from "./Persik";
-export { Home } from "./Home";
+export {default as Main} from "./Main";
+export {default as Rating} from "./Rating";
+export {default as UserProfile} from "./UserProfile";
 
-export type { HomeProps } from "./Home";

@@ -1,55 +1,38 @@
-import { ReactNode, useEffect, useState } from "react";
-import bridge, { UserInfo } from "@vkontakte/vk-bridge";
-import {
-  ModalRoot,
-  ScreenSpinner,
-  SplitCol,
-  SplitLayout,
-  View,
-} from "@vkontakte/vkui";
-import {
-  useActiveVkuiLocation,
-  useRouteNavigator,
-} from "@vkontakte/vk-mini-apps-router";
+import { ScreenSpinner, SplitCol, SplitLayout, View } from "@vkontakte/vkui";
+import { useActiveVkuiLocation } from "@vkontakte/vk-mini-apps-router";
+import { observer } from "mobx-react-lite";
 
-import { Home, Persik } from "./panels";
-import { DEFAULT_VIEW_MODALS, DEFAULT_VIEW_PANELS } from "./routes";
-import CountModal from "./modals/CountModal";
+import { Main, Rating, UserProfile } from "./panels";
+import { DEFAULT_VIEW_PANELS } from "./routes";
+import { AppTabbar } from "./components";
 
-export const App = () => {
-  const { panel = DEFAULT_VIEW_PANELS.HOME, modal } = useActiveVkuiLocation();
-  const [fetchedUser, setUser] = useState<UserInfo | undefined>();
-  const routeNavigator = useRouteNavigator();
+import "./index.css";
+import { userService } from "./services";
 
-  const [popout, setPopout] = useState<ReactNode | null>(
-    <ScreenSpinner size="large" />,
-  );
+userService.initRegister();
 
-  useEffect(() => {
-    async function fetchData() {
-      const user = await bridge.send("VKWebAppGetUserInfo");
-      setUser(user);
-      setPopout(null);
-    }
-
-    fetchData();
-  }, []);
+export const App = observer(() => {
+  const { panel = DEFAULT_VIEW_PANELS.main } = useActiveVkuiLocation();
 
   return (
     <SplitLayout
-      popout={popout}
-      modal={
-        <ModalRoot activeModal={modal} onClose={() => routeNavigator.back()}>
-          <CountModal id={DEFAULT_VIEW_MODALS.COUNTER} />
-        </ModalRoot>
+      popout={
+        userService.userRegisterLoading ? <ScreenSpinner size="large" /> : null
       }
     >
       <SplitCol>
-        <View activePanel={panel}>
-          <Home id={DEFAULT_VIEW_PANELS.HOME} fetchedUser={fetchedUser} />
-          <Persik id={DEFAULT_VIEW_PANELS.PERSIK} />
-        </View>
+        <AppTabbar>
+          {userService.userRegisterLoading ? (
+            <ScreenSpinner size="large" />
+          ) : (
+            <View activePanel={panel}>
+              <Main id={DEFAULT_VIEW_PANELS.main} />
+              <UserProfile id={DEFAULT_VIEW_PANELS.userProfile} />
+              <Rating id={DEFAULT_VIEW_PANELS.rating} />
+            </View>
+          )}
+        </AppTabbar>
       </SplitCol>
     </SplitLayout>
   );
-};
+});
