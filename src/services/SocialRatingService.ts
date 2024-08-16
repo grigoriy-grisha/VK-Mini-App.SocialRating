@@ -1,5 +1,5 @@
 import { UserService } from "./UserService.ts";
-import { http } from "../utils";
+import { http } from "@/utils";
 import { User } from "../entity/user.ts";
 import { makeAutoObservable } from "mobx";
 
@@ -22,26 +22,26 @@ export class SocialRatingService {
 
   async like() {
     const likeResponse = await http.post(
-      `/social-rating/${this.voteAvailableUser.uid}/like`,
+      `/social-rating/${this.getAvailableVotes.uid}/like`,
     );
     console.log(likeResponse);
   }
 
   async hate() {
     const likeResponse = await http.post(
-      `/social-rating/${this.voteAvailableUser.uid}/hate`,
+      `/social-rating/${this.getAvailableVotes.uid}/hate`,
     );
     console.log(likeResponse);
   }
 
   async ignore() {
     const likeResponse = await http.post(
-      `/social-rating/${this.voteAvailableUser.uid}/ignore`,
+      `/social-rating/${this.getAvailableVotes.uid}/ignore`,
     );
     console.log(likeResponse);
   }
 
-  get voteAvailableUser() {
+  get getAvailableVotes() {
     return this.allUsers[0];
   }
 }

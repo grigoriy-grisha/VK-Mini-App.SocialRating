@@ -1,17 +1,18 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import legacy from '@vitejs/plugin-legacy';
+import path from "path";
 
 function handleModuleDirectivesPlugin() {
-  return {
-    name: 'handle-module-directives-plugin',
-    transform(code, id) {
-      if (id.includes('@vkontakte/icons')) {
-        code = code.replace(/"use-client";?/g, '');
-      }
-      return { code };
-    },
-  };
+    return {
+        name: 'handle-module-directives-plugin',
+        transform(code, id) {
+            if (id.includes('@vkontakte/icons')) {
+                code = code.replace(/"use-client";?/g, '');
+            }
+            return { code };
+        },
+    };
 }
 
 /**
@@ -22,26 +23,41 @@ function handleModuleDirectivesPlugin() {
  * The details are here: https://dev.vk.com/mini-apps/development/on-demand-resources.
  */
 export default defineConfig({
-  base: './',
+    base: './',
 
-  plugins: [
-    react(),
-    handleModuleDirectivesPlugin(),
-    legacy({
-      targets: ['defaults', 'not IE 11'],
-    }),
-  ],
+    plugins: [
+        react(),
+        handleModuleDirectivesPlugin(),
+        legacy({
+            targets: ['defaults', 'not IE 11'],
+        }),
+    ],
 
-  server: {
-    port: 5173,
-    host: 'localhost',
-    hmr: {
-      protocol: 'ws',
-      host: 'localhost',
+    server: {
+        port: 5173,
+        host: 'localhost',
+        hmr : {
+            protocol: 'ws',
+            host    : 'localhost',
+        },
     },
-  },
 
-  build: {
-    outDir: 'build',
-  },
+    build: {
+        outDir: 'build',
+    },
+
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './src'),
+            '@sass': path.resolve(__dirname, './src/sass'),
+            '@assets': path.resolve(__dirname, './src/assets'),
+            '@panels': path.resolve(__dirname, './src/panels'),
+            '@modules': path.resolve(__dirname, './src//modules/'),
+            '@components': path.resolve(__dirname, './src/components/'),
+            '@UI': path.resolve(__dirname, './src/UI/'),
+            '@hooks': path.resolve(__dirname, './src/hooks/'),
+            '@utils': path.resolve(__dirname, './src/utils/')
+        },
+        extensions: ['.js', '.ts', '.tsx', '.jsx'],
+    },
 });

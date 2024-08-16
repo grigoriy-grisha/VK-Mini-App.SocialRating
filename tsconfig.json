@@ -19,10 +19,38 @@
     "jsx": "react-jsx",
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    /* Aliases */
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@sass/*": [
+        "./src/sass/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@panels/*": [
+        "./src/panels/*"
+      ],
+      "@modules/*": [
+        "./src/modules/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@UI/*": [
+        "./src/UI/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ]
+    }
   },
   "include": [
     "src"

@@ -3,7 +3,7 @@ import { Panel, Search } from "@vkontakte/vkui";
 import { observer } from "mobx-react-lite";
 
 import { VoteUser } from "./components";
-import { socialRatingService } from "../../services";
+import { socialRatingService } from "@/services";
 
 interface IProps {
   id: string;
@@ -14,14 +14,15 @@ function Main({ id }: IProps) {
     socialRatingService.getAllUser();
   }, []);
 
-  console.log(socialRatingService.voteAvailableUser);
+  console.log(socialRatingService.getAvailableVotes);
 
   return (
     <Panel id={id}>
       <div className="flex flex-col flex-1" style={{ maxWidth: "100vw" }}>
         <Search placeholder="Найти друга" />
-        <VoteUser user={socialRatingService.voteAvailableUser} />
+        <VoteUser user={socialRatingService.getAvailableVotes} />
       </div>
+
     </Panel>
   );
 }

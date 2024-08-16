@@ -4,10 +4,9 @@ import { observer } from "mobx-react-lite";
 
 import { Main, Rating, UserProfile } from "./panels";
 import { DEFAULT_VIEW_PANELS } from "./routes";
-import { AppTabbar } from "./components";
 
-import "./index.css";
 import { userService } from "./services";
+import { AppLayout } from "./components/AppLayout";
 
 userService.initRegister();
 
@@ -21,7 +20,7 @@ export const App = observer(() => {
       }
     >
       <SplitCol>
-        <AppTabbar>
+        <AppLayout>
           {userService.userRegisterLoading ? (
             <ScreenSpinner size="large" />
           ) : (
@@ -31,7 +30,7 @@ export const App = observer(() => {
               <Rating id={DEFAULT_VIEW_PANELS.rating} />
             </View>
           )}
-        </AppTabbar>
+        </AppLayout>
       </SplitCol>
     </SplitLayout>
   );

@@ -1,8 +1,8 @@
 import { UserInfo } from "@vkontakte/vk-bridge/dist/types/src/types/data";
 
 export interface User extends UserInfo {
-  uid: string;
-  _id: string;
+  uid: string; // Vk user id
+  _id: string; // Mongodb id
 }
 
 export interface SocialRatingUser {
