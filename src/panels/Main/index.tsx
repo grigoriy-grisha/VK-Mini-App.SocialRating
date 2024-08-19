@@ -1,6 +1,6 @@
 import React, { CSSProperties, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { socialRatingService } from "@/services";
+import { socialRatingService, userService } from "@/services";
 import AppPanel from "@components/AppPanel";
 import { SwipeCard } from "@/components";
 import { Spacing, Title } from "@vkontakte/vkui";
@@ -73,10 +73,11 @@ function Main({ id }: IProps) {
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
-        socialRatingService.getAllUser();
+        userService.getAuthUser();
     }, []);
 
-    const user = socialRatingService.allUsers[0];
+    const user = userService.user;
+    console.log(user);
 
     if (!user) return null;
 
@@ -117,8 +118,10 @@ function Main({ id }: IProps) {
                                 src={user.photo_max_orig}
                                 alt=""
                             />
+
                             <Spacing size={10} />
-                            <div className="flex items-center  pl-[26px] pr-[26px]">
+
+                            <div className="flex items-center pl-[26px] pr-[26px]">
                                 <Title
                                     className="flex items-center gap-1"
                                     level="2"

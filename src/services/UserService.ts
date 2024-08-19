@@ -5,36 +5,84 @@ import { UserInfo } from "@vkontakte/vk-bridge/dist/types/src/types/data";
 import bridge from "@vkontakte/vk-bridge";
 
 export class UserService {
-  user: SocialRatingUser | null = null;
-  userRegisterLoading = true;
+    vkUserId: number | null = null;
+    user: User | null = null;
 
-  constructor() {
-    makeAutoObservable(this);
-  }
+    isLoading = false;
+    userRegisterLoading = true;
 
-  async initRegister() {
-    await this.registerUser(await this.getUserInfo());
-  }
 
-  async getUserInfo() {
-    return await bridge.send("VKWebAppGetUserInfo");
-  }
-
-  async registerUser(user: UserInfo) {
-    this.userRegisterLoading = true;
-
-    try {
-      this.user = await http.post<UserInfo, SocialRatingUser>(
-        "/auth/register",
-        user,
-      );
-    } finally {
-      console.log("213");
-      this.userRegisterLoading = false;
+    constructor() {
+        makeAutoObservable(this);
     }
-  }
 
-  async getAllUsers() {
-    return await http.get<void, User[]>("/users");
-  }
+    /**
+     * Register / login user when the app is ready.
+     */
+    async initRegister() {
+        const vkUserInfo = await this.getVKUserInfo();
+
+        // Save vk_user_id for future requests.
+        this.vkUserId = vkUserInfo.id;
+
+        // Send request
+        await this.registerUser(vkUserInfo);
+    }
+
+    /**
+     * Load user info from VK using bridge.
+     */
+    async getVKUserInfo() {
+        return await bridge.send("VKWebAppGetUserInfo");
+    }
+
+    /**
+     * Send request to register or login the Vk user.
+     * @param user
+     */
+    async registerUser(user: UserInfo) {
+        this.userRegisterLoading = true;
+
+        try {
+            await http.post<UserInfo, User>(
+                "/auth/register",
+                user,
+            );
+        } finally {
+            this.userRegisterLoading = false;
+        }
+    }
+
+    /**
+     * Load auth user info.
+     */
+    async getAuthUser() {
+        // User is already loaded or not registered yet
+        if(!this.vkUserId || this.user) return this.user;
+
+        this.user = (await this.getUserById(this.vkUserId)).data;
+
+        return this.user;
+    }
+
+    /**
+     * Return all user info by vkUserId.
+     * @param vkUserId
+     */
+    async getUserById(vkUserId: number) {
+        this.isLoading = true;
+
+        try {
+            return await http.get<void, User>(
+                "/users/" + vkUserId,
+            );
+        } finally {
+            this.isLoading = false;
+        }
+    }
+
+    async getAllUsers() {
+        const response = await http.get<void, User[]>("/users");
+        return response.data;
+    }
 }

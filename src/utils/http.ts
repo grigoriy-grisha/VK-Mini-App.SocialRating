@@ -1,11 +1,17 @@
-export interface ResponseHTTP {
+export interface ResponseHTTP<R> {
+    data: R;
+
+    result: boolean;
     status: number;
+    error: null | string;
+    path: string;
+    timestamp: Date;
 }
 
 class Http {
     baseUrl = "http://localhost:3000/api/v1";
 
-    async post<T, R>(path: string, body?: T): Promise<R & ResponseHTTP> {
+    async post<T, R>(path: string, body?: T): Promise<ResponseHTTP<R>> {
         const response = await fetch(this.baseUrl + path, {
             method : "POST",
             body   : body ? JSON.stringify(body) : "",
@@ -19,7 +25,7 @@ class Http {
     }
 
     //todo добавить params
-    async get<T, R>(path: string): Promise<R & ResponseHTTP> {
+    async get<T, R>(path: string): Promise<ResponseHTTP<R>> {
         const response = await fetch(this.baseUrl + path, {
             method : "GET",
             headers: {
