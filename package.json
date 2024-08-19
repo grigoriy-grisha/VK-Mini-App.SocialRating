@@ -17,6 +17,7 @@
     "@vkontakte/vk-bridge-react": "^1.0.1",
     "@vkontakte/vk-mini-apps-router": "^1.4.2",
     "@vkontakte/vkui": "^6.0.0",
+    "fastdom": "^1.0.12",
     "mobx": "^6.13.1",
     "mobx-react-lite": "^4.0.7",
     "path": "^0.12.7",

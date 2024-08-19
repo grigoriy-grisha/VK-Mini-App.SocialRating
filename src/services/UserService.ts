@@ -29,6 +29,7 @@ export class UserService {
         user,
       );
     } finally {
+      console.log("213");
       this.userRegisterLoading = false;
     }
   }

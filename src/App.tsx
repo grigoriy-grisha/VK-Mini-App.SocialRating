@@ -6,7 +6,7 @@ import { Main, Rating, UserProfile } from "./panels";
 import { DEFAULT_VIEW_PANELS } from "./routes";
 
 import { userService } from "./services";
-import { AppLayout } from "./components/AppLayout";
+import { AppLayout } from "@/components";
 
 userService.initRegister();
 

@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href="/logo.svg"/>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
     />
     <title>Social Rating</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <style>
+        :root {
+            --background-app-gradient: linear-gradient(180.22deg, #312E81 0.19%, #0A0A1B 188.61%);
+        }
+
+        .like-theme {
+            --background-app-gradient: linear-gradient(179.37deg, #75ACFF -17.64%, #173861 134.13%);
+        }
+
+        .dislike-theme {
+            --background-app-gradient: linear-gradient(179.72deg, #973A3C -31.4%, #240F0F 117.38%);
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="module" src="/src/main.tsx"></script>
+</body>
 </html>
