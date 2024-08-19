@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { socialRatingService } from "@/services";
 import AppPanel from "@components/AppPanel";
@@ -30,22 +30,30 @@ function getRatingBackground(progress: number) {
   const isLike = progress < -0.5;
   const isDisLike = progress > 0.5;
 
+  const style: CSSProperties = {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    zIndex: -1,
+    transition: "opacity 0.3s",
+  };
+
   return (
     <>
       <img
         className={!isLike && !isDisLike ? "opacity-1" : "opacity-0"}
-        style={{ position: "absolute", left: 0, top: 0, zIndex: -1 }}
+        style={style}
         width="100%"
         src="/SwipeCardBackgroundDefault.svg"
       />
       <img
-        style={{ position: "absolute", left: 0, top: 0, zIndex: -1 }}
+        style={style}
         className={isLike ? "opacity-1" : "opacity-0"}
         width="100%"
         src="/SwipeCardBackgroundLike.svg"
       />
       <img
-        style={{ position: "absolute", left: 0, top: 0, zIndex: -1 }}
+        style={style}
         className={isDisLike ? "opacity-1" : "opacity-0"}
         width="100%"
         src="/SwipeCardBackgroundDisLike.svg"
@@ -80,7 +88,7 @@ function Main({ id }: IProps) {
       {(heightContainer) => (
         <SwipeCard
           onProgress={(progress) => {
-            console.log(progress);
+            setProgress(progress);
             if (progress > 0.5)
               return document.documentElement.classList.add("dislike-theme");
             if (progress < -0.5)
@@ -97,42 +105,29 @@ function Main({ id }: IProps) {
           }}
           heightContainer={heightContainer}
         >
-          {(progress) => (
-            <div
-              className="relative pb-[20px] pt-[10px] pl-[10px] pr-[10px] select-none h-full w-full"
+          <div className="relative pb-[20px] pt-[10px] pl-[10px] pr-[10px] select-none h-full w-full">
+            {getRatingBackground(progress)}
+            <img
               style={{
-                borderTopLeftRadius: "17px",
-                borderTopRightRadius: "17px",
-                borderBottomLeftRadius: "41px",
-                borderBottomRightRadius: "41px",
-                backgroundSize: "100%",
-                backgroundRepeat: "no-repeat",
-                // backgroundImage: getRatingBackground(progress),
+                borderRadius: 28,
+                width: "100%",
+                boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.35)",
               }}
-            >
-              {getRatingBackground(progress)}
-              <img
-                style={{
-                  borderRadius: 28,
-                  width: "100%",
-                  boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.35)",
-                }}
-                src={user.photo_max_orig}
-                alt=""
-              />
-              <Spacing size={10} />
-              <div className="flex items-center  pl-[26px] pr-[26px]">
-                <Title className="flex items-center gap-1" level="2">
-                  {getRatingNumber(progress, 834)} {getRatingIcon(progress)}
-                </Title>
-                <div className="pl-[26px] pr-[44px]">
-                  <Title>{user.first_name}</Title>
-                  <Title>{user.last_name}</Title>
-                </div>
-                <UsersIcon />
+              src={user.photo_max_orig}
+              alt=""
+            />
+            <Spacing size={10} />
+            <div className="flex items-center  pl-[26px] pr-[26px]">
+              <Title className="flex items-center gap-1" level="2">
+                {getRatingNumber(progress, 834)} {getRatingIcon(progress)}
+              </Title>
+              <div className="pl-[26px] pr-[44px]">
+                <Title>{user.first_name}</Title>
+                <Title>{user.last_name}</Title>
               </div>
+              <UsersIcon />
             </div>
-          )}
+          </div>
         </SwipeCard>
       )}
     </AppPanel>

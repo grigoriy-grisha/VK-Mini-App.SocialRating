@@ -1,5 +1,5 @@
 import { Touch } from "@vkontakte/vkui";
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import fastdom from "fastdom";
 
 interface IProps {
@@ -7,31 +7,22 @@ interface IProps {
   onTop: () => void;
   onBottom: () => void;
   onProgress: (value: number) => void;
-  heightContainer: number;
 }
 
 const getValueWithLimit = (value, limit) => {
   return value > limit ? limit : value < -limit ? -limit : value;
 };
 
-function SwipeCard({
-  children,
-  heightContainer,
-  onTop,
-  onBottom,
-  onProgress,
-}: IProps) {
-  const touchRef = React.useRef<HTMLElement>(null);
-
-  const [shiftY, setShiftY] = React.useState(0);
-  const [limitY, setLimitY] = React.useState(heightContainer);
+function SwipeCard({ children, onTop, onBottom, onProgress }: IProps) {
+  const touchRef = React.useRef<HTMLElement | null>(null);
 
   const startY = React.useRef(0);
 
   const onMove = (e) => {
+    const limitY = fastdom.measure(() => touchRef.current?.offsetTop)();
+
     const shiftY = getValueWithLimit(startY.current + e.shiftY, limitY);
 
-    setShiftY(shiftY);
     onProgress(shiftY / limitY);
     fastdom.mutate(() => {
       touchRef.current.style.transform = `translate(0px, ${shiftY}px)`;
@@ -40,6 +31,7 @@ function SwipeCard({
   };
 
   const onEnd = (e) => {
+    const limitY = fastdom.measure(() => touchRef.current?.offsetTop)();
     const shiftY = startY.current + e.shiftY;
 
     if (shiftY < -limitY) {
@@ -55,10 +47,7 @@ function SwipeCard({
       touchRef.current.style.cursor = `grab`;
     });
     onProgress(startY.current / limitY);
-    setShiftY(startY.current);
   };
-
-  useLayoutEffect(() => setLimitY(touchRef.current.offsetTop), []);
 
   return (
     <Touch
@@ -72,7 +61,7 @@ function SwipeCard({
       onMove={onMove}
       onEnd={onEnd}
     >
-      {children(shiftY / limitY)}
+      {children}
     </Touch>
   );
 }
