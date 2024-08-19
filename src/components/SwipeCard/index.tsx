@@ -10,21 +10,24 @@ interface IProps {
 }
 
 const getValueWithLimit = (value: number, limit: number) => {
-    return value > limit ? limit : value < -limit ? -limit : value;
+    return Math.max(-limit, Math.min(limit, value));
 };
 
 function SwipeCard({ children, onTop, onBottom, onProgress }: IProps) {
     const touchRef = React.useRef<HTMLElement | null>(null);
-
     const startY = React.useRef(0);
 
     const onMove = (e: any) => {
         const limitY = fastdom.measure(() => touchRef.current?.offsetTop)();
         if(!limitY) return;
 
+        // Calculate truncated shiftY
         const shiftY = getValueWithLimit(startY.current + e.shiftY, limitY);
 
+        // Tell parent about swipe progress
         onProgress(shiftY / limitY);
+
+        // Move card
         fastdom.mutate(() => {
             if(!touchRef.current) return;
             touchRef.current.style.transform = `translate(0px, ${shiftY}px)`;
@@ -38,20 +41,19 @@ function SwipeCard({ children, onTop, onBottom, onProgress }: IProps) {
 
         if(!limitY) return;
 
-        if (shiftY < -limitY) {
-            onTop();
-        }
+        // Detect the direction of the swipe
+        if (shiftY < -limitY) onTop();
+        if (shiftY > limitY) onBottom();
 
-        if (shiftY > limitY) {
-            onBottom();
-        }
+        // Tell parent about swipe progress
+        onProgress(startY.current / limitY);
 
+        // Reset card position to default
         fastdom.mutate(() => {
             if(!touchRef.current) return;
             touchRef.current.style.transform = `translate(0px, ${startY.current}px)`;
             touchRef.current.style.cursor = `grab`;
         });
-        onProgress(startY.current / limitY);
     };
 
     return (
