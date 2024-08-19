@@ -11,27 +11,27 @@ import { AppLayout } from "@/components";
 userService.initRegister();
 
 export const App = observer(() => {
-  const { panel = DEFAULT_VIEW_PANELS.main } = useActiveVkuiLocation();
+    const { panel = DEFAULT_VIEW_PANELS.main } = useActiveVkuiLocation();
 
-  return (
-    <SplitLayout
-      popout={
-        userService.userRegisterLoading ? <ScreenSpinner size="large" /> : null
-      }
-    >
-      <SplitCol>
-        <AppLayout>
-          {userService.userRegisterLoading ? (
-            <ScreenSpinner size="large" />
-          ) : (
-            <View activePanel={panel}>
-              <Main id={DEFAULT_VIEW_PANELS.main} />
-              <UserProfile id={DEFAULT_VIEW_PANELS.userProfile} />
-              <Rating id={DEFAULT_VIEW_PANELS.rating} />
-            </View>
-          )}
-        </AppLayout>
-      </SplitCol>
-    </SplitLayout>
-  );
+    return (
+        <SplitLayout
+            popout={
+                userService.userRegisterLoading ? <ScreenSpinner size="large" /> : null
+            }
+        >
+            <SplitCol>
+                <AppLayout>
+                    {userService.userRegisterLoading ? (
+                        <ScreenSpinner size="large" />
+                    ) : (
+                        <View activePanel={panel}>
+                            <Main id={DEFAULT_VIEW_PANELS.main} />
+                            <UserProfile id={DEFAULT_VIEW_PANELS.userProfile} />
+                            <Rating id={DEFAULT_VIEW_PANELS.rating} />
+                        </View>
+                    )}
+                </AppLayout>
+            </SplitCol>
+        </SplitLayout>
+    );
 });

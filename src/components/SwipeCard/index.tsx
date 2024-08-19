@@ -3,67 +3,72 @@ import React from "react";
 import fastdom from "fastdom";
 
 interface IProps {
-  children: (shiftPercent: number) => React.ReactNode;
-  onTop: () => void;
-  onBottom: () => void;
-  onProgress: (value: number) => void;
+    children: (shiftPercent: number) => React.ReactNode;
+    onTop: () => void;
+    onBottom: () => void;
+    onProgress: (value: number) => void;
 }
 
-const getValueWithLimit = (value, limit) => {
-  return value > limit ? limit : value < -limit ? -limit : value;
+const getValueWithLimit = (value: number, limit: number) => {
+    return value > limit ? limit : value < -limit ? -limit : value;
 };
 
 function SwipeCard({ children, onTop, onBottom, onProgress }: IProps) {
-  const touchRef = React.useRef<HTMLElement | null>(null);
+    const touchRef = React.useRef<HTMLElement | null>(null);
 
-  const startY = React.useRef(0);
+    const startY = React.useRef(0);
 
-  const onMove = (e) => {
-    const limitY = fastdom.measure(() => touchRef.current?.offsetTop)();
+    const onMove = (e: any) => {
+        const limitY = fastdom.measure(() => touchRef.current?.offsetTop)();
+        if(!limitY) return;
 
-    const shiftY = getValueWithLimit(startY.current + e.shiftY, limitY);
+        const shiftY = getValueWithLimit(startY.current + e.shiftY, limitY);
 
-    onProgress(shiftY / limitY);
-    fastdom.mutate(() => {
-      touchRef.current.style.transform = `translate(0px, ${shiftY}px)`;
-      touchRef.current.style.cursor = `grabbing`;
-    });
-  };
+        onProgress(shiftY / limitY);
+        fastdom.mutate(() => {
+            if(!touchRef.current) return;
+            touchRef.current.style.transform = `translate(0px, ${shiftY}px)`;
+            touchRef.current.style.cursor = `grabbing`;
+        });
+    };
 
-  const onEnd = (e) => {
-    const limitY = fastdom.measure(() => touchRef.current?.offsetTop)();
-    const shiftY = startY.current + e.shiftY;
+    const onEnd = (e: any) => {
+        const limitY = fastdom.measure(() => touchRef.current?.offsetTop)();
+        const shiftY = startY.current + e.shiftY;
 
-    if (shiftY < -limitY) {
-      onTop();
-    }
+        if(!limitY) return;
 
-    if (shiftY > limitY) {
-      onBottom();
-    }
+        if (shiftY < -limitY) {
+            onTop();
+        }
 
-    fastdom.mutate(() => {
-      touchRef.current.style.transform = `translate(0px, ${startY.current}px)`;
-      touchRef.current.style.cursor = `grab`;
-    });
-    onProgress(startY.current / limitY);
-  };
+        if (shiftY > limitY) {
+            onBottom();
+        }
 
-  return (
-    <Touch
-      style={{
-        cursor: "grab",
-        width: "100%",
-        willChange: "transform",
-        transition: "transform 100ms",
-      }}
-      getRootRef={touchRef}
-      onMove={onMove}
-      onEnd={onEnd}
-    >
-      {children}
-    </Touch>
-  );
+        fastdom.mutate(() => {
+            if(!touchRef.current) return;
+            touchRef.current.style.transform = `translate(0px, ${startY.current}px)`;
+            touchRef.current.style.cursor = `grab`;
+        });
+        onProgress(startY.current / limitY);
+    };
+
+    return (
+        <Touch
+            style={{
+                cursor    : "grab",
+                width     : "100%",
+                willChange: "transform",
+                transition: "transform 100ms",
+            }}
+            getRootRef={touchRef}
+            onMove={onMove}
+            onEnd={onEnd}
+        >
+            {children(100)}
+        </Touch>
+    );
 }
 
 export default SwipeCard;
