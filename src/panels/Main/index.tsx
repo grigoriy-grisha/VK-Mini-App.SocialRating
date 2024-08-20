@@ -7,6 +7,8 @@ import { Spacing, Title } from "@vkontakte/vkui";
 import { RatingBottom, RatingTop, UsersIcon } from "@components/Icons";
 import { twJoin } from "tailwind-merge";
 
+import './feed.css';
+
 interface IProps {
     id: string;
 }
@@ -22,9 +24,9 @@ function getRatingIcon(progress: number) {
 }
 
 function getAppBg(progress: number) {
-    if (progress > 0.5) return "bg-app-gradient-dislike";
-    if (progress < -0.5) return "bg-app-gradient-like";
-    return "b";
+    if (progress > 0.5) return "feed-like-bg";
+    if (progress < -0.5) return "feed-hate-bg";
+    return "feed-default-bg";
 }
 
 function getRatingBackground(progress: number) {
@@ -104,72 +106,79 @@ function Main({ id }: IProps) {
     return (
         <AppPanel
             id={id}
-            className="bg-app-gradient flex flex-col flex-1 justify-center items-center px-2"
+
+            className=" flex flex-col flex-1"
         >
-            {(heightContainer) => (
 
-                <div className="">
+            <div
+                className={twJoin(
+                    "relative  px-2",
+                    "flex flex-1 justify-center items-center w-full",
+                    "transition-all feed-bg",
+                    getAppBg(progress)
+                )}
+            >
 
-                    <SwipeCard
-                        onProgress={(progress) => {
-                            setProgress(progress);
-                            if (progress > 0.5)
-                                return document.documentElement.classList.add("dislike-theme");
-                            if (progress < -0.5)
-                                return document.documentElement.classList.add("like-theme");
+                <SwipeCard
+                    onProgress={(progress) => {
+                        setProgress(progress);
 
-                            document.documentElement.classList.remove("like-theme");
-                            document.documentElement.classList.remove("dislike-theme");
-                        }}
-                        onTop={() => {
-                            console.log("top");
-                        }}
-                        onBottom={() => {
-                            console.log("bottom");
-                        }}
-                        // heightContainer={heightContainer}
-                    >
-                        {(shiftPercent: number) => (
-                            <div
-                                className={twJoin(
-                                    "relative select-none h-full w-full z-10",
-                                    "pb-[20px] pt-[10px] pl-[10px] pr-[10px]",
-                                    "overflow-hidden rounded-t-[17px] rounded-b-[41.5px]",
-                                )}
-                            >
-                                {getRatingBackground(progress)}
+                        // if (progress > 0.5)
+                        //     return document.documentElement.classList.add("dislike-theme");
+                        // if (progress < -0.5)
+                        //     return document.documentElement.classList.add("like-theme");
+                        //
+                        // document.documentElement.classList.remove("like-theme");
+                        // document.documentElement.classList.remove("dislike-theme");
+                    }}
+                    onTop={() => {
+                        console.log("top");
+                    }}
+                    onBottom={() => {
+                        console.log("bottom");
+                    }}
+                    // heightContainer={heightContainer}
+                >
+                    {(shiftPercent: number) => (
+                        <div
+                            className={twJoin(
+                                "relative select-none h-full w-full z-10",
+                                "pb-[20px] pt-[10px] pl-[10px] pr-[10px]",
+                                "overflow-hidden rounded-t-[17px] rounded-b-[41.5px]",
+                            )}
+                        >
+                            {getRatingBackground(progress)}
 
-                                <img
-                                    style={{
-                                        borderRadius: 28,
-                                        width       : "100%",
-                                        boxShadow   : "0px 4px 4px 0px rgba(0, 0, 0, 0.35)",
-                                    }}
-                                    src={user.photo_max_orig}
-                                    alt={user.first_name}
-                                />
+                            <img
+                                style={{
+                                    borderRadius: 28,
+                                    width       : "100%",
+                                    boxShadow   : "0px 4px 4px 0px rgba(0, 0, 0, 0.35)",
+                                }}
+                                src={user.photo_max_orig}
+                                alt={user.first_name}
+                            />
 
-                                <Spacing size={10} />
+                            <Spacing size={10} />
 
-                                <div className="flex items-center pl-[26px] pr-[26px]">
-                                    <Title
-                                        className="flex items-center gap-1"
-                                        level="2"
-                                    >
-                                        {getRatingNumber(progress, 834)} {getRatingIcon(progress)}
-                                    </Title>
-                                    <div className="pl-[26px] pr-[44px]">
-                                        <Title>{user.first_name}</Title>
-                                        <Title>{user.last_name}</Title>
-                                    </div>
-                                    <UsersIcon />
+                            <div className="flex items-center pl-[26px] pr-[26px]">
+                                <Title
+                                    className="flex items-center gap-1"
+                                    level="2"
+                                >
+                                    {getRatingNumber(progress, 834)} {getRatingIcon(progress)}
+                                </Title>
+                                <div className="pl-[26px] pr-[44px]">
+                                    <Title>{user.first_name}</Title>
+                                    <Title>{user.last_name}</Title>
                                 </div>
+                                <UsersIcon />
                             </div>
-                        )}
-                    </SwipeCard>
+                        </div>
+                    )}
+                </SwipeCard>
 
-                </div>
-            )}
+            </div>
 
         </AppPanel>
     );

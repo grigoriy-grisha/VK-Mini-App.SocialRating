@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 interface IProps {
     id: string;
     className?: string;
-    children: (height: number) => React.ReactNode;
+    children: React.ReactNode;
     getHeight?: (height: number) => void;
 }
 
@@ -30,7 +30,7 @@ function AppPanel({ id, children, getHeight, className }: IProps) {
                 )}
                 style={{ width: "100%", height: "100vh" }}
             >
-                {children(height)}
+                {children}
             </div>
         </Panel>
     );

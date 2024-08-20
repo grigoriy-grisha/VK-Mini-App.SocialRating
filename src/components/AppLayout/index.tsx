@@ -1,6 +1,7 @@
 import React from "react";
 
 import { BottomNavigation } from "@/components";
+import { BottomNavigationBubble } from "@components/BottomNavigationBubble";
 
 interface IProps {
     children: React.ReactElement;
@@ -8,7 +9,13 @@ interface IProps {
 
 export const AppLayout = ({ children }: IProps) => {
     return (
-        <div className="flex justify-center min-h-full">
+        <div
+            className="flex justify-center min-h-full"
+            style={{
+                background: "url(/background.png)",
+                backgroundSize: "cover"
+            }}
+        >
             <div
                 style={{ maxWidth: 400, width: "100%" }}
                 className="overflow-hidden flex flex-col"
@@ -18,6 +25,7 @@ export const AppLayout = ({ children }: IProps) => {
                 </div>
 
                 <BottomNavigation />
+                {/*<BottomNavigationBubble />*/}
             </div>
         </div>
     );

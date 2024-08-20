@@ -61,6 +61,7 @@ function SwipeCard({ children, onTop, onBottom, onProgress }: IProps) {
             style={{
                 cursor    : "grab",
                 width     : "100%",
+                maxWidth  : "360px",
                 willChange: "transform",
                 transition: "transform 100ms",
             }}
