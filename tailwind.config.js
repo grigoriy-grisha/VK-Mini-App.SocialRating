@@ -56,7 +56,7 @@ export default {
                 },
             },
             screens: {
-                xs: "560px",
+                xs: "440px",
             },
 
             boxShadow: {

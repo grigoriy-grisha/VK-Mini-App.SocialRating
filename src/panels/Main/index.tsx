@@ -4,91 +4,14 @@ import { socialRatingService, userService } from "@/services";
 import AppPanel from "@components/AppPanel";
 import { SwipeCard } from "@/components";
 import { Spacing, Title } from "@vkontakte/vkui";
-import { RatingBottom, RatingTop, UsersIcon } from "@components/Icons";
 import { twJoin } from "tailwind-merge";
 
-import './feed.css';
+import './feed.scss';
 import { TopSearchBar } from "@components/AppLayout/components/TopSearchBar.tsx";
+import { getAppBg, getRatingBackground, getRatingIcon, getRatingNumber, getUsersIcon } from "@panels/Main/utils.tsx";
 
 interface IProps {
     id: string;
-}
-
-function getRatingIcon(progress: number) {
-    if (progress > 0.5) return <RatingBottom />;
-    if (progress < -0.5) return <RatingTop />;
-    return (
-        <div className="opacity-0">
-            <RatingBottom />
-        </div>
-    );
-}
-
-function getAppBg(progress: number) {
-    if (progress > 0.5) return "feed-like-bg";
-    if (progress < -0.5) return "feed-hate-bg";
-    return "feed-default-bg";
-}
-
-function getRatingBackground(progress: number) {
-    const isLike = progress < -0.5;
-    const isDisLike = progress > 0.5;
-
-    const style: CSSProperties = {
-        position  : "absolute",
-        inset     : 0,
-        zIndex    : -1,
-        transition: "all 0.12s easy-in-out",
-    };
-
-    // Decrease progress range
-    progress = Math.max(-1, Math.min(1, progress * 1.5));
-
-    console.log(1 - Math.abs(progress))
-
-    return (
-        <>
-            {/* Like */}
-            <img
-                style={{
-                    ...style,
-                    transform: `translateY(-${(100 + progress * 100) / 2}%)`,
-                    opacity  : -progress
-                }}
-                // className={isLike ? "opacity-1" : "opacity-0"}
-                src="/feed/likeCardBG.png"
-            />
-
-            {/* Default */}
-            <img
-                style={{
-                    ...style,
-                    transform: `translateY(${-progress * 100}%)`,
-                    opacity  : 1 - Math.abs(progress)
-                }}
-                // className={!isLike && !isDisLike ? "opacity-1" : "opacity-0"}
-                src="/feed/defaultCardBG.png"
-            />
-
-            {/* Hate */}
-            <img
-                style={{
-                    ...style,
-                    transform: `translateY(${(100 - progress * 100) / 2}%)`,
-                    opacity  : progress
-
-                }}
-                // className={isDisLike ? "opacity-1" : "opacity-0"}
-                src="/feed/hateCardBG.png"
-            />
-        </>
-    );
-}
-
-function getRatingNumber(progress: number, rating: number) {
-    if (progress > 0.5) return rating - 1;
-    if (progress < -0.5) return rating + 1;
-    return rating;
 }
 
 //todo вынести стили в tailwind
@@ -114,7 +37,7 @@ function Main({ id }: IProps) {
                 className={twJoin(
                     "relative px-2",
                     "flex flex-1 justify-center items-center w-full",
-                    "transition-all feed-bg",
+                    "transition-all",
                     getAppBg(progress)
                 )}
             >
@@ -161,18 +84,33 @@ function Main({ id }: IProps) {
 
                             <Spacing size={10} />
 
-                            <div className="flex items-center pl-[26px] pr-[26px]">
-                                <Title
-                                    className="flex items-center gap-1"
-                                    level="2"
+                            <div
+                                className="relative flex items-center justify-between px-[20px]"
+                            >
+                                <span
+                                    className="text-adaptive-color rating flex items-center gap-1"
+                                    style={{ fontSize: '23px', fontWeight: 700 }}
                                 >
-                                    {getRatingNumber(progress, 834)} {getRatingIcon(progress)}
-                                </Title>
-                                <div className="pl-[26px] pr-[44px]">
-                                    <Title>{user.first_name}</Title>
-                                    <Title>{user.last_name}</Title>
+                                    {getRatingNumber(progress, user?.social_rating.total)} {getRatingIcon(progress)}
+                                </span>
+
+                                <div
+                                    className="w-full min-h-[83px]"
+                                    style={{
+                                        fontSize  : Math.max(user.first_name.length, user.last_name.length) > 10 ? '28' : '36px',
+                                        fontWeight: 700,
+                                        lineHeight: '33px'
+                                    }}
+                                >
+                                    <div className="absolute inset-0 flex items-center">
+                                        <div className="mx-auto flex flex-wrap justify-center gap-x-2 max-w-[200px] text-adaptive-color">
+                                            <h1>{user.first_name}1</h1>
+                                            <h2>{user.last_name}</h2>
+                                        </div>
+                                    </div>
                                 </div>
-                                <UsersIcon />
+
+                                {getUsersIcon(progress)}
                             </div>
                         </div>
                     )}

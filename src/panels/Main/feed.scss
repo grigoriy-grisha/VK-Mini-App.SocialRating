@@ -1,0 +1,38 @@
+.feed-default-bg {
+    background: linear-gradient(180.22deg, #312E81 0.19%, #0A0A1B 188.61%);
+
+    .text-adaptive-color {
+        color: white;
+        background: linear-gradient(97.98deg, #FFFFFF -5.15%, #DCDCDC 44.11%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+.feed-like-bg {
+    background: linear-gradient(179.37deg, #75ACFF -17.64%, #173861 134.13%);
+
+    .text-adaptive-color {
+        color:  #09A3E6;
+        background: linear-gradient(56.38deg, #112741 -29.63%, #09A3E6 61.56%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+.feed-hate-bg {
+    background: linear-gradient(179.72deg, #973A3C -31.4%, #240F0F 117.38%);
+
+    .text-adaptive-color:not(.rating) {
+        color:  #DE2B2B;
+        background: linear-gradient(56.38deg, #411112 -29.63%, #850709 61.56%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .text-adaptive-color.rating {
+        background: linear-gradient(180deg, #E64646 0%, #DE2B2B 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}

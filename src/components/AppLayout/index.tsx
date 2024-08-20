@@ -18,7 +18,7 @@ export const AppLayout = ({ children }: IProps) => {
             }}
         >
             <div
-                className="overflow-hidden flex flex-col w-full sm:max-w-[400px]"
+                className="overflow-hidden flex flex-col w-full xs:max-w-[400px]"
             >
                 <div className="pb-[5.05rem] flex flex-1">
                     {children}
