@@ -15,25 +15,23 @@ function Rating({id}: IProps) {
         className=""
     >
         <TopSearchBar>
-            <Title>
-                Рейтинг
-            </Title>
+            Рейтинг
         </TopSearchBar>
 
         <div className="rating-page flex flex-1 w-full">
 
 
             <video
-                className="video-background object-cover object-left w-full h-full blur-md opacity-80"
+                className="video-background object-cover object-center w-full h-full blur-md opacity-60"
                 autoPlay
                 loop
                 muted
-                onPlay={(e) => e.currentTarget.playbackRate = 0.5}
+                onPlay={(e) => e.currentTarget.playbackRate = 0.37}
             >
                 <div className="animated-bg" />
 
                 <source
-                    src="/rating/background_2.mp4"
+                    src="/rating/background_3.mp4"
                     type="video/mp4"
                 >
                 </source>

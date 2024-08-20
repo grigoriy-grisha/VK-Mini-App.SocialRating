@@ -4,6 +4,7 @@ import backIcon from '../assets/back.svg';
 import searchIcon from '../assets/search.svg';
 import { twJoin } from "tailwind-merge";
 import { useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
+import { Title } from "@vkontakte/vkui";
 
 interface TopSearchBarProps {
     children?: ReactNode;
@@ -32,8 +33,14 @@ export const TopSearchBar: FC<TopSearchBarProps> = memo(({ children }) => {
 
             {/* Title */}
             {
-                children && <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl">
-                    {children}
+                children && <div
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                >
+                    <Title
+                        style={{ fontSize: '25px', fontWeight: 700 }}
+                    >
+                        {children}
+                    </Title>
                 </div>
             }
 
