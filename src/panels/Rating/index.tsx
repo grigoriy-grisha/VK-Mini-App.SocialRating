@@ -23,7 +23,21 @@ function Rating({id}: IProps) {
         <div className="rating-page flex flex-1 w-full">
 
 
-            <div className="animated-bg"></div>
+            <video
+                className="video-background object-cover object-left w-full h-full blur-md opacity-80"
+                autoPlay
+                loop
+                muted
+                onPlay={(e) => e.currentTarget.playbackRate = 0.5}
+            >
+                <div className="animated-bg" />
+
+                <source
+                    src="/rating/background_2.mp4"
+                    type="video/mp4"
+                >
+                </source>
+            </video>
 
         </div>
     </AppPanel>
