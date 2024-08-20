@@ -18,7 +18,7 @@ function SwipeCard({ children, onTop, onBottom, onProgress }: IProps) {
     const startY = React.useRef(0);
 
     const onMove = (e: any) => {
-        const limitY = fastdom.measure(() => touchRef.current?.offsetTop)();
+        const limitY = fastdom.measure(() => (touchRef.current?.offsetTop || 0) - 20 )();
         if(!limitY) return;
 
         // Calculate truncated shiftY
@@ -36,7 +36,7 @@ function SwipeCard({ children, onTop, onBottom, onProgress }: IProps) {
     };
 
     const onEnd = (e: any) => {
-        const limitY = fastdom.measure(() => touchRef.current?.offsetTop)();
+        const limitY = fastdom.measure(() => (touchRef.current?.offsetTop || 0) + 20)();
         const shiftY = startY.current + e.shiftY;
 
         if(!limitY) return;

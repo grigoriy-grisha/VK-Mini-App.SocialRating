@@ -5,6 +5,7 @@ import AppPanel from "@components/AppPanel";
 import { SwipeCard } from "@/components";
 import { Spacing, Title } from "@vkontakte/vkui";
 import { RatingBottom, RatingTop, UsersIcon } from "@components/Icons";
+import { twJoin } from "tailwind-merge";
 
 interface IProps {
     id: string;
@@ -31,32 +32,51 @@ function getRatingBackground(progress: number) {
     const isDisLike = progress > 0.5;
 
     const style: CSSProperties = {
-        position: "absolute",
-        left: 0,
-        top: 0,
-        zIndex: -1,
-        transition: "opacity 0.3s",
+        position  : "absolute",
+        inset     : 0,
+        zIndex    : -1,
+        transition: "all 0.12s easy-in-out",
     };
+
+    // Decrease progress range
+    progress = Math.max(-1, Math.min(1, progress * 1.5));
+
+    console.log(1 - Math.abs(progress))
 
     return (
         <>
+            {/* Like */}
             <img
-                className={!isLike && !isDisLike ? "opacity-1" : "opacity-0"}
-                style={style}
-                width="100%"
-                src="/SwipeCardBackgroundDefault.svg"
+                style={{
+                    ...style,
+                    transform: `translateY(-${(100 + progress * 100) / 2}%)`,
+                    opacity  : -progress
+                }}
+                // className={isLike ? "opacity-1" : "opacity-0"}
+                src="/feed/likeCardBG.png"
             />
+
+            {/* Default */}
             <img
-                style={style}
-                className={isLike ? "opacity-1" : "opacity-0"}
-                width="100%"
-                src="/SwipeCardBackgroundLike.svg"
+                style={{
+                    ...style,
+                    transform: `translateY(${-progress * 100}%)`,
+                    opacity  : 1 - Math.abs(progress)
+                }}
+                // className={!isLike && !isDisLike ? "opacity-1" : "opacity-0"}
+                src="/feed/defaultCardBG.png"
             />
+
+            {/* Hate */}
             <img
-                style={style}
-                className={isDisLike ? "opacity-1" : "opacity-0"}
-                width="100%"
-                src="/SwipeCardBackgroundDisLike.svg"
+                style={{
+                    ...style,
+                    transform: `translateY(${(100 - progress * 100) / 2}%)`,
+                    opacity  : progress
+
+                }}
+                // className={isDisLike ? "opacity-1" : "opacity-0"}
+                src="/feed/hateCardBG.png"
             />
         </>
     );
@@ -84,60 +104,73 @@ function Main({ id }: IProps) {
     return (
         <AppPanel
             id={id}
-            className="bg-app-gradient flex flex-col flex-1 justify-center items-center"
+            className="bg-app-gradient flex flex-col flex-1 justify-center items-center px-2"
         >
             {(heightContainer) => (
-                <SwipeCard
-                    onProgress={(progress) => {
-                        setProgress(progress);
-                        if (progress > 0.5)
-                            return document.documentElement.classList.add("dislike-theme");
-                        if (progress < -0.5)
-                            return document.documentElement.classList.add("like-theme");
 
-                        document.documentElement.classList.remove("like-theme");
-                        document.documentElement.classList.remove("dislike-theme");
-                    }}
-                    onTop={() => {
-                        console.log("top");
-                    }}
-                    onBottom={() => {
-                        console.log("bottom");
-                    }}
-                    // heightContainer={heightContainer}
-                >
-                    {(shiftPercent: number) => (
-                        <div className="relative pb-[20px] pt-[10px] pl-[10px] pr-[10px] select-none h-full w-full">
-                            {getRatingBackground(progress)}
-                            <img
-                                style={{
-                                    borderRadius: 28,
-                                    width       : "100%",
-                                    boxShadow   : "0px 4px 4px 0px rgba(0, 0, 0, 0.35)",
-                                }}
-                                src={user.photo_max_orig}
-                                alt=""
-                            />
+                <div className="">
 
-                            <Spacing size={10} />
+                    <SwipeCard
+                        onProgress={(progress) => {
+                            setProgress(progress);
+                            if (progress > 0.5)
+                                return document.documentElement.classList.add("dislike-theme");
+                            if (progress < -0.5)
+                                return document.documentElement.classList.add("like-theme");
 
-                            <div className="flex items-center pl-[26px] pr-[26px]">
-                                <Title
-                                    className="flex items-center gap-1"
-                                    level="2"
-                                >
-                                    {getRatingNumber(progress, 834)} {getRatingIcon(progress)}
-                                </Title>
-                                <div className="pl-[26px] pr-[44px]">
-                                    <Title>{user.first_name}</Title>
-                                    <Title>{user.last_name}</Title>
+                            document.documentElement.classList.remove("like-theme");
+                            document.documentElement.classList.remove("dislike-theme");
+                        }}
+                        onTop={() => {
+                            console.log("top");
+                        }}
+                        onBottom={() => {
+                            console.log("bottom");
+                        }}
+                        // heightContainer={heightContainer}
+                    >
+                        {(shiftPercent: number) => (
+                            <div
+                                className={twJoin(
+                                    "relative select-none h-full w-full z-10",
+                                    "pb-[20px] pt-[10px] pl-[10px] pr-[10px]",
+                                    "overflow-hidden rounded-t-[17px] rounded-b-[41.5px]",
+                                )}
+                            >
+                                {getRatingBackground(progress)}
+
+                                <img
+                                    style={{
+                                        borderRadius: 28,
+                                        width       : "100%",
+                                        boxShadow   : "0px 4px 4px 0px rgba(0, 0, 0, 0.35)",
+                                    }}
+                                    src={user.photo_max_orig}
+                                    alt={user.first_name}
+                                />
+
+                                <Spacing size={10} />
+
+                                <div className="flex items-center pl-[26px] pr-[26px]">
+                                    <Title
+                                        className="flex items-center gap-1"
+                                        level="2"
+                                    >
+                                        {getRatingNumber(progress, 834)} {getRatingIcon(progress)}
+                                    </Title>
+                                    <div className="pl-[26px] pr-[44px]">
+                                        <Title>{user.first_name}</Title>
+                                        <Title>{user.last_name}</Title>
+                                    </div>
+                                    <UsersIcon />
                                 </div>
-                                <UsersIcon />
                             </div>
-                        </div>
-                    )}
-                </SwipeCard>
+                        )}
+                    </SwipeCard>
+
+                </div>
             )}
+
         </AppPanel>
     );
 }

@@ -19,13 +19,13 @@ export const BottomNavigation = () => {
     const navigation = useMemo(() => ([
         {
             title : "Топ",
-            panel : DEFAULT_VIEW_PANELS.main,
+            panel : DEFAULT_VIEW_PANELS.rating,
             Icon  : Icon28ListOutline,
             offset: "translate-x-0",
         },
         {
             title : "Лента",
-            panel : DEFAULT_VIEW_PANELS.rating,
+            panel : DEFAULT_VIEW_PANELS.main,
             Icon  : Icon28CheckCircleOutline,
             offset: "translate-x-16",
         },
@@ -47,12 +47,20 @@ export const BottomNavigation = () => {
     }, [panel, navigation]);
 
     return (
-        <Div className="">
-            <div className="fixed left-0 right-0 bottom-0 h-[5.05rem] bg-app w-screen mx-auto"></div>
+        <div className="relative">
+
+            {/* Menu bg */}
+            <div
+                className="absolute left-0 right-0 bottom-0 h-[5.05rem] bg-app w-full mx-auto"
+                style={{
+                    boxShadow: "0px -0px 10px #1c1b47, 0px -0px 10px #1c1b47",
+                }}
+            />
+
             <div
                 className={twJoin(
                     "max-h-[4.4rem] rounded-xl flex justify-center",
-                    "fixed bottom-[5px] left-1/2 -translate-x-1/2 xs:w-[calc(100vw-10px)] w-screen",
+                    "absolute bottom-[5px] left-1/2 -translate-x-1/2 w-[calc(100%-10px)]",
                     "bg-app-dark shadow-md shadow-app",
                 )}
             >
@@ -97,11 +105,11 @@ export const BottomNavigation = () => {
                                 
                                 <span
                                     className={twJoin(
-                                        "text-xl mb-1 duration-500 pointer-events-none select-none z-[1]",
+                                        "mb-1 duration-500 pointer-events-none select-none z-[1]",
                                         i === active && "-mt-[1.8rem] text-white",
                                     )}
                                 >
-                                    <item.Icon />
+                                    <item.Icon className="scale-125"/>
                                 </span>
 
                                 <span
@@ -119,6 +127,6 @@ export const BottomNavigation = () => {
                     ))}
                 </ul>
             </div>
-        </Div>
+        </div>
     );
 };

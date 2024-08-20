@@ -1,5 +1,6 @@
 import { Panel } from "@vkontakte/vkui";
 import React, { useLayoutEffect, useRef, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface IProps {
     id: string;
@@ -23,8 +24,11 @@ function AppPanel({ id, children, getHeight, className }: IProps) {
         <Panel id={id}>
             <div
                 ref={ref}
-                className={className}
-                style={{ maxWidth: "100vw", minHeight: "calc(100vh - 100px)" }}
+                className={twMerge(
+                    "",
+                    className
+                )}
+                style={{ width: "100%", height: "100vh" }}
             >
                 {children(height)}
             </div>

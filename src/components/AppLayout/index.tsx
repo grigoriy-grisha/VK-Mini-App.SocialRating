@@ -8,9 +8,15 @@ interface IProps {
 
 export const AppLayout = ({ children }: IProps) => {
     return (
-        <div className="bg-app-gradient flex justify-center">
-            <div style={{ maxWidth: 360 }}>
-                {children}
+        <div className="flex justify-center min-h-full">
+            <div
+                style={{ maxWidth: 400, width: "100%" }}
+                className="overflow-hidden flex flex-col"
+            >
+                <div className="pb-[5.05rem] flex flex-1">
+                    {children}
+                </div>
+
                 <BottomNavigation />
             </div>
         </div>
