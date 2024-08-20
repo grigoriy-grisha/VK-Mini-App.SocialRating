@@ -1,43 +1,41 @@
-import { Panel, PanelHeader, Title } from "@vkontakte/vkui";
+import { Panel, PanelHeader, Spacing, Title } from "@vkontakte/vkui";
 import { TopSearchBar } from "@components/AppLayout/components/TopSearchBar.tsx";
 import React from "react";
 import AppPanel from "@components/AppPanel";
 
 import './rating.scss';
+import { VideoBg } from "@panels/Rating/components/VideoBG.tsx";
+import { TopUsers } from "@panels/Rating/components/TopUsers.tsx";
+import { User } from "@/entity/user.ts";
+import { TopToggleTabs } from "@panels/Rating/components/TopToggleTabs.tsx";
 
 interface IProps {
     id: string
 }
 
-function Rating({id}: IProps) {
+function Rating({ id }: IProps) {
+    const users: User[] = []; // Top 100 or top 10
+
     return <AppPanel
         id={id}
-        className=""
+        className="flex flex-col"
     >
-        <TopSearchBar>
-            Рейтинг
-        </TopSearchBar>
+        <div className="rating-page flex flex-col items-center flex-1 w-full">
 
-        <div className="rating-page flex flex-1 w-full">
+            <TopSearchBar>
+                Рейтинг
+            </TopSearchBar>
 
+            <Spacing size={83}/>
 
-            <video
-                className="video-background object-cover object-center w-full h-full blur-md opacity-60"
-                autoPlay
-                loop
-                muted
-                onPlay={(e) => e.currentTarget.playbackRate = 0.37}
-            >
-                <div className="animated-bg" />
+            <VideoBg />
 
-                <source
-                    src="/rating/background_3.mp4"
-                    type="video/mp4"
-                >
-                </source>
-            </video>
+            <TopToggleTabs />
+
+            <TopUsers users={users} />
 
         </div>
+
     </AppPanel>
 }
 
