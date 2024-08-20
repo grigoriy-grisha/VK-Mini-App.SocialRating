@@ -8,6 +8,7 @@ import { RatingBottom, RatingTop, UsersIcon } from "@components/Icons";
 import { twJoin } from "tailwind-merge";
 
 import './feed.css';
+import { TopSearchBar } from "@components/AppLayout/components/TopSearchBar.tsx";
 
 interface IProps {
     id: string;
@@ -106,13 +107,12 @@ function Main({ id }: IProps) {
     return (
         <AppPanel
             id={id}
-
-            className=" flex flex-col flex-1"
         >
+            <TopSearchBar />
 
             <div
                 className={twJoin(
-                    "relative  px-2",
+                    "relative px-2",
                     "flex flex-1 justify-center items-center w-full",
                     "transition-all feed-bg",
                     getAppBg(progress)
@@ -177,9 +177,7 @@ function Main({ id }: IProps) {
                         </div>
                     )}
                 </SwipeCard>
-
             </div>
-
         </AppPanel>
     );
 }

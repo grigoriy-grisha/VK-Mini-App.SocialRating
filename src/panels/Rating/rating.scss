@@ -1,0 +1,47 @@
+.rating-page {
+    background-color: #1f1a42;
+
+    .animated-bg{
+        --blur: 15px;
+
+        position: absolute;
+        inset: 0;
+        background-image: url("/public/rating/rating_bg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        opacity: .8;
+        //filter: blur(100px);
+
+        transform-origin: center right;
+        animation: bgWaveAnimation 8s infinite ease-in-out;
+    }
+
+}
+
+@keyframes bgWaveAnimation {
+    0% {
+        filter: blur(var(--blur)) brightness(100%);
+        transform: rotate(0deg) translateX(0) translateY(0);
+    }
+    33% {
+        filter: blur(var(--blur)) brightness(130%);
+        transform: rotate(6deg) translateX(3px) translateY(-6px);
+    }
+    50% {
+        filter: blur(var(--blur)) brightness(90%);
+        transform: rotate(0deg) translateX(0px) translateY(3px);
+
+    }
+    66% {
+        filter: blur(var(--blur)) brightness(150%);
+        transform: rotate(-5deg) translateX(-3px) translateY(-3px);
+    }
+    80% {
+        filter: blur(var(--blur)) brightness(70%);
+    }
+    100% {
+        filter: blur(var(--blur)) brightness(100%);
+        transform: rotate(0deg) translateX(0) translateY(0);
+    }
+}

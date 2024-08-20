@@ -1,7 +1,8 @@
 import React from "react";
+import { BottomNavigationBubble } from "@components/AppLayout/components/BottomNavigationBubble.tsx";
+import { TopSearchBar } from "@components/AppLayout/components/TopSearchBar.tsx";
+import { Title } from "@vkontakte/vkui";
 
-import { BottomNavigation } from "@/components";
-import { BottomNavigationBubble } from "@components/BottomNavigationBubble";
 
 interface IProps {
     children: React.ReactElement;
@@ -17,15 +18,14 @@ export const AppLayout = ({ children }: IProps) => {
             }}
         >
             <div
-                style={{ maxWidth: 400, width: "100%" }}
-                className="overflow-hidden flex flex-col"
+                className="overflow-hidden flex flex-col w-full sm:max-w-[400px]"
             >
                 <div className="pb-[5.05rem] flex flex-1">
                     {children}
                 </div>
 
-                <BottomNavigation />
-                {/*<BottomNavigationBubble />*/}
+                {/*<BottomNavigation />*/}
+                <BottomNavigationBubble />
             </div>
         </div>
     );

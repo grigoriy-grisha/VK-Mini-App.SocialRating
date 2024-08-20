@@ -1,4 +1,6 @@
-import {Panel, PanelHeader} from "@vkontakte/vkui";
+import { Panel, PanelHeader, Title } from "@vkontakte/vkui";
+import { TopSearchBar } from "@components/AppLayout/components/TopSearchBar.tsx";
+import React from "react";
 
 interface IProps {
     id: string
@@ -6,7 +8,12 @@ interface IProps {
 
 function UserProfile({id}: IProps) {
     return <Panel id={id}>
-        <PanelHeader>Главная</PanelHeader>
+
+        <TopSearchBar>
+            <Title>
+                Профиль
+            </Title>
+        </TopSearchBar>
     </Panel>
 }
 
