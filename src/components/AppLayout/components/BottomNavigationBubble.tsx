@@ -18,7 +18,9 @@ import circle1Img from '../assets/circle_1.png';
 import circle2Img from '../assets/circle_2.png';
 import circle3Img from '../assets/circle_3.png';
 
-import leaderboardIcon from '../assets/LeaderboardIcon.svg';
+import leaderboardIcon from '../assets/leaderboardIcon.svg';
+import profileIcon from '../assets/profileIcon.svg';
+import emojiIcon from '../assets/emojiIcon.png';
 
 export const Bubble: FC<{ offsetClass: string }> = memo(({ offsetClass }) => {
     const [isBubblePositionChanging, setIsBubblePositionChanging] = useState(false);
@@ -101,13 +103,13 @@ export const BottomNavigationBubble = () => {
         {
             title : "Лента",
             panel : DEFAULT_VIEW_PANELS.main,
-            Icon  : leaderboardIcon,
+            Icon  : emojiIcon,
             offset: "translate-x-[6.5rem]",
         },
         {
             title : "Профиль",
             panel : DEFAULT_VIEW_PANELS.userProfile,
-            Icon  : leaderboardIcon,
+            Icon  : profileIcon,
             offset: "translate-x-52",
         },
         // { title: "Настройки", link: '/settings', Icon: BsGear, offset: "translate-x-48" },
