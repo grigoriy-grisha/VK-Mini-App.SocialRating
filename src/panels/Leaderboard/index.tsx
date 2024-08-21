@@ -38,7 +38,6 @@ function Leaderboard({ id }: IProps) {
     }, [currentTab]);
 
     const users: User[] = leaderboardService.users; // Top 100 or top 10
-    console.log(users);
 
     return <AppPanel
         id={id}

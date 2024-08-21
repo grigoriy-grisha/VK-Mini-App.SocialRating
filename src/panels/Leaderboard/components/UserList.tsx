@@ -4,6 +4,7 @@ import { twJoin } from "tailwind-merge";
 import { userService } from "@/services";
 import { Text, Title } from "@vkontakte/vkui";
 import { useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
+import { ErrorMessage } from "@/components";
 
 interface TopUsersProps {
     users: User[];
@@ -15,6 +16,8 @@ export const UserList: FC<TopUsersProps> = memo(({
     const authUserVkUserId = userService.vkUserId;
 
     const routeNavigator = useRouteNavigator();
+
+    if(!users) return <ErrorMessage>Не удалось загрузить пользователей</ErrorMessage>;
 
     return (
         <ul className="flex flex-col w-full px-1.5 text-white z-10">

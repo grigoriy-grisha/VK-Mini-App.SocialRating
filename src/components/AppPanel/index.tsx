@@ -25,7 +25,7 @@ function AppPanel({ id, children, getHeight, className }: IProps) {
             <div
                 ref={ref}
                 className={twMerge(
-                    "flex flex-1",
+                    "flex flex-1 bg-app",
                     className
                 )}
                 style={{ width: "100%", height: "100vh" }}
