@@ -55,8 +55,8 @@ export function getRatingBackground(progress: number) {
     const style: CSSProperties = {
         position  : "absolute",
         inset     : 0,
-        width     : "100%",
-        height    : "100%",
+        width     : "107%",
+        height    : "107%",
         objectFit : "cover",
         zIndex    : -1,
         transition: "all 0.12s easy-in-out",

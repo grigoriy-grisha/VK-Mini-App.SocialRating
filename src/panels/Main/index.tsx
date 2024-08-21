@@ -23,7 +23,6 @@ function Main({ id }: IProps) {
     }, []);
 
     const user = userService.user;
-    console.log(user);
 
     if (!user) return null;
 

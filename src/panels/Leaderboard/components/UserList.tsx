@@ -1,0 +1,75 @@
+import React, { memo, FC } from 'react';
+import { User } from "@/entity/user.ts";
+import { twJoin } from "tailwind-merge";
+import { userService } from "@/services";
+import { Text, Title } from "@vkontakte/vkui";
+import { useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
+
+interface TopUsersProps {
+    users: User[];
+}
+
+export const UserList: FC<TopUsersProps> = memo(({
+    users
+}) => {
+    const authUserVkUserId = userService.vkUserId;
+
+    const routeNavigator = useRouteNavigator();
+
+    return (
+        <ul className="flex flex-col w-full px-1.5 text-white z-10">
+            {users.map((user, i) => {
+                return (
+                    <li
+                        className={twJoin(
+                            "flex items-center rounded-2xl w-full h-20 px-3.5",
+                            (+user.uid == authUserVkUserId) && "bg-white/10 backdrop-blur-sm shadow-inner shadow-white/5",
+                            "cursor-pointer"
+                        )}
+                        onClick={() => routeNavigator.push(`/users/${user.uid}`)}
+                    >
+
+                        {/* Position */}
+                        <div style={{ fontSize: '14px' }}>
+                            {i + 1}
+                        </div>
+
+                        {/*  Avatar   */}
+                        <div className="px-4">
+                            <img
+                                src={user.photo_100}
+                                className="w-12 h-12 rounded-[14px]"
+                            />
+                        </div>
+
+                        {/*  Name and rating  */}
+                        <div className="flex flex-col gap-1 flex-1">
+                            <Title
+                                className=""
+                                style={{ fontSize: '14px', fontWeight: 700, color: '#eeeeee' }}
+                            >
+                                {user.first_name + ' ' + user.last_name}
+                            </Title>
+
+                            <div
+                                className=""
+                                style={{ fontSize: '12px', fontWeight: 400, color: '#8d8d8f' }}
+                            >
+                                Рейтинг: {user.social_rating.total}
+                            </div>
+                        </div>
+
+                        {/*  Gift  */}
+                        {/* TODO: check on back if user has already won the gift*/}
+                        {i === 0 && (
+                            <img
+                                src="/rating/cup.png"
+                                alt="🎁"
+                            />
+                        )}
+                    </li>
+                );
+            })}
+        </ul>
+    );
+});
