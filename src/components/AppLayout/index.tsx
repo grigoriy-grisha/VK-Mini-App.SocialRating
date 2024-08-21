@@ -20,7 +20,7 @@ export const AppLayout = ({ children }: IProps) => {
             <div
                 className="overflow-hidden flex flex-col w-full xs:max-w-[400px]"
             >
-                <div className="pb-[5.05rem] flex flex-1">
+                <div className="pb-20 flex flex-1">
                     {children}
                 </div>
 
