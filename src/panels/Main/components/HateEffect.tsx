@@ -33,7 +33,7 @@ const ParticlesEffect = () => {
                 duration  : 500,
                 particles : {
                     number: {
-                        value  : 50, // Particles count
+                        value  : 40, // Particles count
                     },
                     //  Image is a particle
                     shape  : {

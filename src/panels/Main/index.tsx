@@ -35,7 +35,7 @@ function Main({ id }: IProps) {
 
         setTimeout(() => {
             setShowHateEffect(false);
-        }, 1500);
+        }, 1510);
     }
 
     const onLike = () => {
