@@ -10,6 +10,7 @@ import './feed.scss';
 import { TopSearchBar } from "@components/AppLayout/components/TopSearchBar.tsx";
 import { getAppBg, getRatingBackground, getRatingIcon, getRatingNumber, getUsersIcon } from "@panels/Main/utils.tsx";
 import { UserSwipeCard } from "@panels/Main/components/UserSwipeCard.tsx";
+import { HateEffect } from "@panels/Main/components/HateEffect.tsx";
 
 interface IProps {
     id: string;
@@ -17,6 +18,7 @@ interface IProps {
 
 //todo вынести стили в tailwind
 function Main({ id }: IProps) {
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
         userService.getAuthUser();
@@ -30,11 +32,28 @@ function Main({ id }: IProps) {
         >
             <TopSearchBar />
 
-            {
-                user
-                    ? <UserSwipeCard user={user} />
-                    : <ErrorMessage>Не удалось загрузить пользователя</ErrorMessage>
-            }
+            <div
+                className={twJoin(
+                    "relative px-2",
+                    "flex flex-col flex-1 justify-center items-center w-full",
+                    "transition-all",
+                    getAppBg(progress)
+                )}
+            >
+
+                {/*<HateEffect />*/}
+
+                {
+                    user
+                        ? <UserSwipeCard
+                            user={user}
+                            progress={progress}
+                            setProgress={setProgress}
+                        />
+                        : <ErrorMessage>Не удалось загрузить пользователя</ErrorMessage>
+                }
+
+            </div>
 
         </AppPanel>
     );

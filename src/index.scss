@@ -2,9 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'fonts.scss';
+
 html, body {
     height: 100%;
     width: 100%;
     overflow: hidden;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 

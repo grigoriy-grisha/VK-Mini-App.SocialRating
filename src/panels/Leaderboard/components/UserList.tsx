@@ -20,9 +20,10 @@ export const UserList: FC<TopUsersProps> = memo(({
     if(!users) return <ErrorMessage>Не удалось загрузить пользователей</ErrorMessage>;
 
     if(users.length == 0) return <ErrorMessage>В топе пока никого нет😱</ErrorMessage>;
+    users = [...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,];
 
     return (
-        <ul className="flex flex-col w-full px-1.5 text-white z-10">
+        <ul className="relative flex flex-col w-full px-1.5 text-white z-10">
             {users.map((user, i) => {
                 return (
                     <li

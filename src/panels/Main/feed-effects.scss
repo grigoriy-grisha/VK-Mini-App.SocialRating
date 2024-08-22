@@ -1,0 +1,15 @@
+.hate-effect {
+    .hate-rating-text {
+        color: #CB2121;
+        background: linear-gradient(180deg, #FFB7B7 0%, #CB2121 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        font-family: "VK Sans Display";
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 40px;
+        text-align: left;
+
+    }
+}

@@ -4,12 +4,12 @@ import { RatingBottom, RatingDefault, RatingTop } from "@panels/Main/Icons";
 
 enum SwipeAction {
     LIKE = "like",
-    DISLIKE = "dislike",
+    HATE = "hate",
     NONE = "none"
 }
 
 const getSwipeAction = (progress: number) => {
-    if (progress > 0.5) return SwipeAction.DISLIKE;
+    if (progress > 0.5) return SwipeAction.HATE;
     if (progress < -0.5) return SwipeAction.LIKE;
     return SwipeAction.NONE;
 }
@@ -17,7 +17,7 @@ const getSwipeAction = (progress: number) => {
 export function getRatingIcon(progress: number) {
     const swipeAction = getSwipeAction(progress);
 
-    if (swipeAction == SwipeAction.DISLIKE) return <RatingBottom />;
+    if (swipeAction == SwipeAction.HATE) return <RatingBottom />;
     if (swipeAction == SwipeAction.LIKE) return <RatingTop />;
 
     return (
@@ -28,7 +28,7 @@ export function getRatingIcon(progress: number) {
 export function getAppBg(progress: number) {
     const swipeAction = getSwipeAction(progress);
 
-    if (swipeAction == SwipeAction.DISLIKE) return "feed-hate-bg";
+    if (swipeAction == SwipeAction.HATE) return "feed-hate-bg";
     if (swipeAction == SwipeAction.LIKE) return "feed-like-bg";
     return "feed-default-bg";
 }
@@ -36,7 +36,7 @@ export function getAppBg(progress: number) {
 export function getRatingNumber(progress: number, rating: number) {
     const swipeAction = getSwipeAction(progress);
 
-    if (swipeAction == SwipeAction.DISLIKE) return rating - 1;
+    if (swipeAction == SwipeAction.HATE) return rating - 1;
     if (swipeAction == SwipeAction.LIKE) return rating + 1;
     return rating;
 }
@@ -44,7 +44,7 @@ export function getRatingNumber(progress: number, rating: number) {
 export function getUsersIcon(progress: number) {
     const swipeAction = getSwipeAction(progress);
 
-    if (swipeAction == SwipeAction.DISLIKE) return  <UsersIconHate />;
+    if (swipeAction == SwipeAction.HATE) return  <UsersIconHate />;
     if (swipeAction == SwipeAction.LIKE) return  <UsersIconLike />;
     return <UsersIconDefault />;
 }

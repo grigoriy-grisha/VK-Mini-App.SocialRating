@@ -43,7 +43,7 @@ function Leaderboard({ id }: IProps) {
         id={id}
         className="flex flex-col"
     >
-        <div className="rating-page flex flex-col items-center flex-1 w-full">
+        <div className="rating-page flex flex-col items-center w-full h-full">
 
             <VideoBg />
 
@@ -60,7 +60,9 @@ function Leaderboard({ id }: IProps) {
 
             <Spacing size={10} />
 
-            <UserList users={users} />
+            <div className="overflow-y-auto w-full h-max z-10 pb-10 no-scrollbar">
+                <UserList users={users} />
+            </div>
 
         </div>
 

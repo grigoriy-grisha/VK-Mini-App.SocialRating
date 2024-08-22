@@ -11,7 +11,7 @@ interface IProps {
 export const AppLayout = ({ children }: IProps) => {
     return (
         <div
-            className="flex justify-center min-h-full"
+            className="flex justify-center min-h-full font-vk select-none relative"
             style={{
                 background: "url(/background.png)",
                 backgroundSize: "cover"
@@ -20,7 +20,7 @@ export const AppLayout = ({ children }: IProps) => {
             <div
                 className="overflow-hidden flex flex-col w-full xs:max-w-[400px]"
             >
-                <div className="pb-20 flex flex-1">
+                <div className="pb-20 flex flex-1 max-h-screen">
                     {children}
                 </div>
 

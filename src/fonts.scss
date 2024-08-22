@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'VK Sans Display';
+    src: url('/fonts/VKSansDisplay-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'VK Sans Display';
+    src: url('/fonts/VKSansDisplay-Medium.ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'VK Sans Display';
+    src: url('/fonts/VKSansDisplay-Bold.ttf');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.font-vk {
+    font-family: 'VK Sans Display';
+}
