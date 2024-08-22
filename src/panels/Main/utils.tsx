@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react";
 import { UsersIconDefault, UsersIconHate, UsersIconLike } from "@panels/Main/Icons/UsersIcon.tsx";
-import { RatingBottom, RatingTop } from "@panels/Main/Icons";
+import { RatingBottom, RatingDefault, RatingTop } from "@panels/Main/Icons";
 
 enum SwipeAction {
     LIKE = "like",
@@ -21,9 +21,7 @@ export function getRatingIcon(progress: number) {
     if (swipeAction == SwipeAction.LIKE) return <RatingTop />;
 
     return (
-        <div className="opacity-0">
-            <RatingBottom />
-        </div>
+        <RatingDefault />
     );
 }
 

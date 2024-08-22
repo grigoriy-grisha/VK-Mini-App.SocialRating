@@ -45,8 +45,9 @@ export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({ user }) => {
                 {(shiftPercent: number) => (
                     <div
                         className={twJoin(
-                            "relative select-none h-full w-full z-10",
-                            "pb-[20px] pt-[10px] pl-[10px] pr-[10px]",
+                            "relative select-none z-10",
+                            "max-h-[450px] max-w-[360px] mx-auto",
+                            "pb-[0px] pt-[10px] pl-[5px] pr-[5px]",
                             "overflow-hidden rounded-t-[17px] rounded-b-[41.5px]",
                         )}
                     >
@@ -62,10 +63,8 @@ export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({ user }) => {
                             alt={user.first_name}
                         />
 
-                        <Spacing size={10} />
-
                         <div
-                            className="relative flex items-center justify-between px-[20px]"
+                            className="relative flex items-center justify-between px-[23px]"
                         >
                             <span
                                 className="text-adaptive-color rating flex items-center gap-1"
@@ -75,7 +74,7 @@ export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({ user }) => {
                             </span>
 
                             <div
-                                className="w-full min-h-[83px]"
+                                className="w-full min-h-[93px]"
                                 style={{
                                     fontSize  : Math.max(user.first_name.length, user.last_name.length) > 10 ? '28' : '36px',
                                     fontWeight: 700,
@@ -84,7 +83,7 @@ export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({ user }) => {
                             >
                                 <div className="absolute inset-0 flex items-center">
                                     <div className="mx-auto flex flex-wrap justify-center gap-x-2 max-w-[200px] text-adaptive-color">
-                                        <h1>{user.first_name}1</h1>
+                                        <h1>{user.first_name}</h1>
                                         <h2>{user.last_name}</h2>
                                     </div>
                                 </div>

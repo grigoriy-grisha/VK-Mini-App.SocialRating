@@ -19,6 +19,8 @@ export const UserList: FC<TopUsersProps> = memo(({
 
     if(!users) return <ErrorMessage>Не удалось загрузить пользователей</ErrorMessage>;
 
+    if(users.length == 0) return <ErrorMessage>В топе пока никого нет😱</ErrorMessage>;
+
     return (
         <ul className="flex flex-col w-full px-1.5 text-white z-10">
             {users.map((user, i) => {
@@ -63,10 +65,16 @@ export const UserList: FC<TopUsersProps> = memo(({
                         </div>
 
                         {/*  Gift  */}
-                        {/* TODO: check on back if user has already won the gift*/}
                         {i === 0 && (
                             <img
                                 src="/rating/cup.png"
+                                alt="🎁"
+                            />
+                        )}
+
+                        {user.hasWon &&(
+                            <img
+                                src="/logo.svg"
                                 alt="🎁"
                             />
                         )}

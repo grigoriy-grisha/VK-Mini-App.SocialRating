@@ -18,6 +18,7 @@ export const LeaderboardTabs: FC<TopToggleTabsProps> = memo(({
             <div className="flex mx-auto divide-x divide-white/40 rounded-[11px] h-[37px] w-10/12 whitespace-nowrap overflow-hidden shadow backdrop-blur-sm">
                 <button
                     className={twJoin(
+                        "rounded-[11px] rounded-r-none",
                         "h-full w-1/2 px-3 flex items-center justify-center",
                         currentTab === LeaderboardTabsEnum.TOP_100 ? "bg-white/30 shadow-inner" : "bg-white/20",
                         "hover:bg-white/30"
@@ -29,6 +30,7 @@ export const LeaderboardTabs: FC<TopToggleTabsProps> = memo(({
 
                 <button
                     className={twJoin(
+                        "rounded-[11px] rounded-l-none",
                         "h-full w-1/2 px-3 flex items-center justify-center",
                         currentTab === LeaderboardTabsEnum.HALL_OF_FAME ? "bg-white/30 shadow-inner" : "bg-white/20",
                         "hover:bg-white/30"

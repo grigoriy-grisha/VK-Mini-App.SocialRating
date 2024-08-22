@@ -45,13 +45,13 @@ function Leaderboard({ id }: IProps) {
     >
         <div className="rating-page flex flex-col items-center flex-1 w-full">
 
+            <VideoBg />
+
             <TopSearchBar>
                 Рейтинг
             </TopSearchBar>
 
             <Spacing size={83}/>
-
-            <VideoBg />
 
             <LeaderboardTabs
                 currentTab={currentTab}

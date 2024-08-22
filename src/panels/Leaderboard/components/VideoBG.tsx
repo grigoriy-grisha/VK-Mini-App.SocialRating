@@ -4,7 +4,7 @@ interface VideoBgProps {
 
 }
 
-export const VideoBg: FC<VideoBgProps> = memo(({}) => {
+export const VideoBg: FC<VideoBgProps> = memo(() => {
 
 
     return (

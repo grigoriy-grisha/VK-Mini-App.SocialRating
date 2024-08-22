@@ -16,6 +16,9 @@ export interface User extends UserInfo {
     votes: number;
     voted_for: string[];
 
+    // True if user already has won the gift
+    hasWon: boolean;
+
     referrer: User | null;
     referrals: User[];
 
