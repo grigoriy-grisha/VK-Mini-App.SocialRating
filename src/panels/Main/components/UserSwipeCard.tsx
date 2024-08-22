@@ -9,12 +9,17 @@ interface UserSwipeCardProps {
     user: User;
     progress: number;
     setProgress: SetState<number>;
+
+    onLike: () => void;
+    onHate: () => void;
 }
 
 export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({
     user,
     progress,
-    setProgress
+    setProgress,
+    onLike,
+    onHate
 }) => {
 
     return (
@@ -30,13 +35,8 @@ export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({
                 // document.documentElement.classList.remove("like-theme");
                 // document.documentElement.classList.remove("dislike-theme");
             }}
-            onTop={() => {
-                console.log("top");
-            }}
-            onBottom={() => {
-                console.log("bottom");
-            }}
-            // heightContainer={heightContainer}
+            onTop={onLike}
+            onBottom={onHate}
         >
             {(shiftPercent: number) => (
                 <div

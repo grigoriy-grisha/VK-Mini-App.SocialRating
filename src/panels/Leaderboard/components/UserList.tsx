@@ -20,13 +20,14 @@ export const UserList: FC<TopUsersProps> = memo(({
     if(!users) return <ErrorMessage>Не удалось загрузить пользователей</ErrorMessage>;
 
     if(users.length == 0) return <ErrorMessage>В топе пока никого нет😱</ErrorMessage>;
-    users = [...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,];
+    // users = [...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,...users, ...users, ...users,];
 
     return (
         <ul className="relative flex flex-col w-full px-1.5 text-white z-10">
             {users.map((user, i) => {
                 return (
                     <li
+                        key={user.uid}
                         className={twJoin(
                             "flex items-center rounded-2xl w-full h-20 px-3.5",
                             (+user.uid == authUserVkUserId) && "bg-white/10 backdrop-blur-sm shadow-inner shadow-white/5",

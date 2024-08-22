@@ -26,6 +26,22 @@ function Main({ id }: IProps) {
 
     const user = userService.user;
 
+    const [showHateEffect, setShowHateEffect] = useState(false);
+
+    const onHate = () => {
+        console.log('I hate this nigga');
+
+        setShowHateEffect(true);
+
+        setTimeout(() => {
+            setShowHateEffect(false);
+        }, 1500);
+    }
+
+    const onLike = () => {
+        console.log('God damn, I like this dude!');
+    }
+
     return (
         <AppPanel
             id={id}
@@ -41,7 +57,7 @@ function Main({ id }: IProps) {
                 )}
             >
 
-                {/*<HateEffect />*/}
+                <HateEffect show={showHateEffect} />
 
                 {
                     user
@@ -49,6 +65,8 @@ function Main({ id }: IProps) {
                             user={user}
                             progress={progress}
                             setProgress={setProgress}
+                            onLike={onLike}
+                            onHate={onHate}
                         />
                         : <ErrorMessage>Не удалось загрузить пользователя</ErrorMessage>
                 }

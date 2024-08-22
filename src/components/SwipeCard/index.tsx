@@ -1,6 +1,8 @@
 import { Touch } from "@vkontakte/vkui";
 import React from "react";
 import fastdom from "fastdom";
+import { Simulate } from "react-dom/test-utils";
+import progress = Simulate.progress;
 
 interface IProps {
     children: (shiftPercent: number) => React.ReactNode;
@@ -45,15 +47,20 @@ function SwipeCard({ children, onTop, onBottom, onProgress }: IProps) {
         if (shiftY < -limitY) onTop();
         if (shiftY > limitY) onBottom();
 
-        // Tell parent about swipe progress
-        onProgress(startY.current / limitY);
+        const progress = shiftY / limitY;
+        console.log(progress)
 
         // Reset card position to default
-        fastdom.mutate(() => {
-            if(!touchRef.current) return;
-            touchRef.current.style.transform = `translate(0px, ${startY.current}px)`;
-            touchRef.current.style.cursor = `grab`;
-        });
+        setTimeout(() => {
+            // Tell parent about swipe progress
+            onProgress(0);
+
+            fastdom.mutate(() => {
+                if(!touchRef.current) return;
+                touchRef.current.style.transform = `translate(0px, ${startY.current}px)`;
+                touchRef.current.style.cursor = `grab`;
+            });
+        }, Math.abs(progress) > 1 ? 1500 : 10);
     };
 
     return (
@@ -64,6 +71,7 @@ function SwipeCard({ children, onTop, onBottom, onProgress }: IProps) {
                 maxWidth  : "360px",
                 willChange: "transform",
                 transition: "transform 100ms",
+                zIndex: 2
             }}
             getRootRef={touchRef}
             onMove={onMove}

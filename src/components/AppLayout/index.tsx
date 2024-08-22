@@ -14,11 +14,12 @@ export const AppLayout = ({ children }: IProps) => {
             className="flex justify-center min-h-full font-vk select-none relative"
             style={{
                 background: "url(/background.png)",
+                backgroundPosition: "center",
                 backgroundSize: "cover"
             }}
         >
             <div
-                className="overflow-hidden flex flex-col w-full xs:max-w-[400px]"
+                className="overflow-hidden flex flex-col w-full xs:max-w-[367px]"
             >
                 <div className="pb-20 flex flex-1 max-h-screen">
                     {children}
