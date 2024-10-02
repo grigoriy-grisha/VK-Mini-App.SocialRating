@@ -12,6 +12,8 @@ import { getAppBg, getRatingBackground, getRatingIcon, getRatingNumber, getUsers
 import { UserSwipeCard } from "@panels/Main/components/UserSwipeCard.tsx";
 import { HateEffect } from "@panels/Main/components/HateEffect.tsx";
 import { User } from "@/entity/user.ts";
+import { VideoBg } from "@components/VideoBG/VideoBG.tsx";
+import { useBlink } from "@hooks/useBlink.ts";
 
 interface IProps {
     id: string;
@@ -20,8 +22,7 @@ interface IProps {
 //todo вынести стили в tailwind
 function Main({ id }: IProps) {
     const [progress, setProgress] = useState(0);
-    console.log(progress)
-
+    const [infoMessage, setInfoMessage, blinkInfoMessage] = useBlink<string>('');
 
     const [targetUser, setTargetUser] = useState<User | null>(null);
     const loadNextUser = async () => {
@@ -41,8 +42,6 @@ function Main({ id }: IProps) {
     const [showLikeEffect, setShowLikeEffect] = useState(false);
 
     const onHate = async () => {
-        console.log('I hate this nigga');
-
         setShowHateEffect(true);
 
         setTimeout(async () => {
@@ -52,10 +51,13 @@ function Main({ id }: IProps) {
             if(!targetUser) return;
 
             // Send request to rate the user
-            const result = (await socialRatingService.hate(targetUser.uid));
+            const response = (await socialRatingService.hate(targetUser.uid));
 
-            if(result.status) setTargetUser(result.data); // We get the next user
-            else loadNextUser(); // If we get an error, load the next user.
+            if(response.result) setTargetUser(response.data); // We get the next user
+            else {
+                loadNextUser(); // If we get an error, load the next user.
+                blinkInfoMessage(response.error || 'Произошла какая-то ошибка');
+            }
         }, 1510);
     }
 
@@ -70,10 +72,13 @@ function Main({ id }: IProps) {
             if(!targetUser) return;
 
             // Send request to rate the user
-            const result = (await socialRatingService.like(targetUser.uid));
+            const response = (await socialRatingService.like(targetUser.uid));
 
-            if(result.status) setTargetUser(result.data); // We get the next user
-            else loadNextUser(); // If we get an error, load the next user.
+            if(response.result) setTargetUser(response.data); // We get the next user
+            else {
+                loadNextUser(); // If we get an error, load the next user.
+                blinkInfoMessage(response.error || 'Произошла какая-то ошибка');
+            }
         }, 1510);
     }
 
@@ -91,6 +96,16 @@ function Main({ id }: IProps) {
                     getAppBg(progress)
                 )}
             >
+
+                <VideoBg />
+
+                {infoMessage && <div className="absolute bottom-20 w-full">
+                    <ErrorMessage>
+                        <div className="w-10/12 mx-auto p-1 rounded-2xl bg-indigo-400/20 backdrop-blur-sm text-xsm text-balance">
+                            <span className="holo-font">{infoMessage}</span>
+                        </div>
+                    </ErrorMessage>
+                </div>}
 
                 <HateEffect show={showHateEffect} />
 

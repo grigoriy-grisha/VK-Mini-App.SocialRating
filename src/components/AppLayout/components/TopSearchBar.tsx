@@ -105,7 +105,7 @@ export const TopSearchBar: FC<TopSearchBarProps> = memo(({ children }) => {
             {/* Back */}
             <button
                 onClick={() => routeNavigator.back()}
-                className="flex p-5 hover:scale-110 origin-center transition-transform will-change-transform"
+                className="flex p-5 mr-2.5 hover:scale-110 origin-center transition-transform will-change-transform"
             >
                 <img
                     src={backIcon}
@@ -166,7 +166,7 @@ export const TopSearchBar: FC<TopSearchBarProps> = memo(({ children }) => {
                     className={twJoin(
                         "absolute px-5 top-20 bg-white/30 backdrop-blur-xl left-5 right-5 z-10 rounded-2xl shadow-[0px_100px_100px_50px_rgba(10,10,50,0.6)]",
                         "transition-all duration-100 ease-in h-max overflow-y-scroll no-scrollbar",
-                        isSearchBarActive ? "h-[450px] py-5 opacity-100 delay-300" : "max-h-0 h-0 opacity-100",
+                        isSearchBarActive ? "h-[450px] max-h-[450px] py-5 opacity-100 delay-300" : "max-h-0 h-0 opacity-100",
                         "flex flex-col gap-5"
                     )}
                 >
@@ -182,10 +182,12 @@ export const TopSearchBar: FC<TopSearchBarProps> = memo(({ children }) => {
                     </p>
 
                     <button
-                        className="bg-white/50 hover:bg-white/60 transition-colors p-3 text-xl font-bold text-black rounded-lg mt-auto"
+                        className="transition-colors p-3 text-xl font-bold bg-black/70 hover:bg-black/80 rounded-lg mt-auto"
                         onClick={handleSearchFriend}
                     >
-                        Поиск среди друзей
+                        <div className="holo-font">
+                            Поиск среди друзей
+                        </div>
                     </button>
 
                     {/*{filteredFriendsList.map((friend: User) =>*/}

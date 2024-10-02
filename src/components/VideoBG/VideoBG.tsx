@@ -14,6 +14,7 @@ export const VideoBg: FC<VideoBgProps> = memo(() => {
                 autoPlay
                 loop
                 muted
+                poster="/rating/background_3_poster.png"
                 onPlay={(e) => e.currentTarget.playbackRate = 0.37}
             >
                 <div className="animated-bg" />

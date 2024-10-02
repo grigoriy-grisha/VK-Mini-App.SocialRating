@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import AppPanel from "@components/AppPanel";
 
 import './rating.scss';
-import { VideoBg } from "@panels/Leaderboard/components/VideoBG.tsx";
+import { VideoBg } from "@components/VideoBG/VideoBG.tsx";
 import { UserList } from "@panels/Leaderboard/components/UserList.tsx";
 import { User } from "@/entity/user.ts";
 import { LeaderboardTabs } from "@panels/Leaderboard/components/LeaderboardTabs.tsx";
