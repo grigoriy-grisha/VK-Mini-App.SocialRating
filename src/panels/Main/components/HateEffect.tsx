@@ -52,7 +52,7 @@ const ParticlesEffect = () => {
                     },
                     move   : {
                         enable   : true,
-                        speed    : 16, // Move speed
+                        speed    : 8, // Move speed
                         vibrate  : true,
                         direction: "outside", // Move direction
                         out_mode : "out",

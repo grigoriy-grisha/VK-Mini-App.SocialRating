@@ -1,33 +1,11 @@
 function RatingTop() {
     return (
-        <svg
-            width="25"
-            height="19"
-            viewBox="0 0 25 19"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-                d="M19.4 1L24 6.66667M19.4 1L14.8 6.66667M19.4 1V18M1 1H11.7333M1 6.66667H10.2M1 12.3333H8.66667M7.13333 18H1"
-                stroke="url(#paint0_linear_2539_265)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
+        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="20" viewBox="0 0 27 20" fill="none">
+            <path d="M21 1L26 7M21 1L16 7M21 1V19M1 1H13M1 7H11M1 13H9M8 19H1" stroke="url(#paint0_linear_2747_779)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             <defs>
-                <linearGradient
-                    id="paint0_linear_2539_265"
-                    x1="-58.8"
-                    y1="-28.0417"
-                    x2="8.7011"
-                    y2="23.0218"
-                    gradientUnits="userSpaceOnUse"
-                >
-                    <stop stopColor="#4399DF" />
-                    <stop
-                        offset="1"
-                        stopColor="#076385"
-                    />
+                <linearGradient id="paint0_linear_2747_779" x1="-64" y1="-29.75" x2="96.3094" y2="125.108" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="white"/>
+                    <stop offset="1" stopColor="#11BFFF"/>
                 </linearGradient>
             </defs>
         </svg>
