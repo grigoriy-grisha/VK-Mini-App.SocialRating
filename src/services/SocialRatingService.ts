@@ -20,28 +20,32 @@ export class SocialRatingService {
         }
     }
 
-    async like() {
-        const likeResponse = await http.post(
-            `/social-rating/${this.getAvailableVotes.uid}/like`,
+    async like(targetUserId: string) {
+        const likeResponse = await http.post<void, User | null>(
+            `/social-rating/${targetUserId}/like`,
         );
         console.log(likeResponse);
+        return likeResponse;
     }
 
-    async hate() {
-        const likeResponse = await http.post(
-            `/social-rating/${this.getAvailableVotes.uid}/hate`,
+    async hate(targetUserId: string) {
+        const hateResponse = await http.post<void, User | null>(
+            `/social-rating/${targetUserId}/hate`,
         );
-        console.log(likeResponse);
+        console.log(hateResponse);
+        return hateResponse;
     }
 
-    async ignore() {
-        const likeResponse = await http.post(
-            `/social-rating/${this.getAvailableVotes.uid}/ignore`,
+    async ignore(targetUserId: string) {
+        const ignoreResponse = await http.post<void, User | null>(
+            `/social-rating/${targetUserId}/ignore`,
         );
-        console.log(likeResponse);
+
+        console.log(ignoreResponse);
+        return ignoreResponse;
     }
 
-    get getAvailableVotes() {
-        return this.allUsers[0];
-    }
+    // get getAvailableVotes() {
+    //     return this.allUsers[0];
+    // }
 }

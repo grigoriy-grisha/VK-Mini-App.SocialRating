@@ -1,6 +1,6 @@
 import React, { CSSProperties, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { socialRatingService, userService } from "@/services";
+import { feedService, socialRatingService, userService } from "@/services";
 import AppPanel from "@components/AppPanel";
 import { ErrorMessage, SwipeCard } from "@/components";
 import { Spacing, Title } from "@vkontakte/vkui";
@@ -11,6 +11,7 @@ import { TopSearchBar } from "@components/AppLayout/components/TopSearchBar.tsx"
 import { getAppBg, getRatingBackground, getRatingIcon, getRatingNumber, getUsersIcon } from "@panels/Main/utils.tsx";
 import { UserSwipeCard } from "@panels/Main/components/UserSwipeCard.tsx";
 import { HateEffect } from "@panels/Main/components/HateEffect.tsx";
+import { User } from "@/entity/user.ts";
 
 interface IProps {
     id: string;
@@ -19,27 +20,61 @@ interface IProps {
 //todo вынести стили в tailwind
 function Main({ id }: IProps) {
     const [progress, setProgress] = useState(0);
+    console.log(progress)
+
+
+    const [targetUser, setTargetUser] = useState<User | null>(null);
+    const loadNextUser = async () => {
+        const nextUser = (await feedService.getNextUser()).data;
+        setTargetUser(nextUser)
+    };
 
     useEffect(() => {
         userService.getAuthUser();
+
+        loadNextUser();
     }, []);
 
-    const user = userService.user;
+    const authUser = userService.user;
 
     const [showHateEffect, setShowHateEffect] = useState(false);
+    const [showLikeEffect, setShowLikeEffect] = useState(false);
 
-    const onHate = () => {
+    const onHate = async () => {
         console.log('I hate this nigga');
 
         setShowHateEffect(true);
 
-        setTimeout(() => {
+        setTimeout(async () => {
             setShowHateEffect(false);
+
+            return;
+            if(!targetUser) return;
+
+            // Send request to rate the user
+            const result = (await socialRatingService.hate(targetUser.uid));
+
+            if(result.status) setTargetUser(result.data); // We get the next user
+            else loadNextUser(); // If we get an error, load the next user.
         }, 1510);
     }
 
-    const onLike = () => {
-        console.log('God damn, I like this dude!');
+    const onLike = async () => {
+
+        setShowLikeEffect(true);
+
+        setTimeout(async () => {
+            setShowLikeEffect(false);
+
+            return;
+            if(!targetUser) return;
+
+            // Send request to rate the user
+            const result = (await socialRatingService.like(targetUser.uid));
+
+            if(result.status) setTargetUser(result.data); // We get the next user
+            else loadNextUser(); // If we get an error, load the next user.
+        }, 1510);
     }
 
     return (
@@ -60,15 +95,19 @@ function Main({ id }: IProps) {
                 <HateEffect show={showHateEffect} />
 
                 {
-                    user
+                    targetUser
                         ? <UserSwipeCard
-                            user={user}
+                            user={targetUser}
                             progress={progress}
                             setProgress={setProgress}
                             onLike={onLike}
                             onHate={onHate}
                         />
-                        : <ErrorMessage>Не удалось загрузить пользователя</ErrorMessage>
+                        : <ErrorMessage>
+                            <div className="w-full h-16 p-5 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                                Вы оценили всех пользователей😊
+                            </div>
+                        </ErrorMessage>
                 }
 
             </div>

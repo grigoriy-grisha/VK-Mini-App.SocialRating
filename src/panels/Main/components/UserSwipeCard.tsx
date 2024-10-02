@@ -24,6 +24,7 @@ export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({
 
     return (
         <SwipeCard
+            progress={progress}
             onProgress={(progress) => {
                 setProgress(progress);
 
