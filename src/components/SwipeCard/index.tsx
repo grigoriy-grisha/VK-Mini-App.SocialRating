@@ -2,7 +2,6 @@ import { Touch } from "@vkontakte/vkui";
 import React from "react";
 import fastdom from "fastdom";
 import { Simulate } from "react-dom/test-utils";
-import progress = Simulate.progress;
 
 interface IProps {
     children: (shiftPercent: number) => React.ReactNode;
@@ -21,6 +20,7 @@ function SwipeCard({ children, onTop, onBottom, progress, onProgress }: IProps) 
     const startY = React.useRef(0);
 
     const onMove = (e: any) => {
+        // Calculate limit position
         const limitY = fastdom.measure(() => (touchRef.current?.offsetTop || 0))();
         if(!limitY) return;
 
@@ -39,7 +39,9 @@ function SwipeCard({ children, onTop, onBottom, progress, onProgress }: IProps) 
         });
     };
 
+    // When user release the card
     const onEnd = (e: any) => {
+        // Calculate limit position
         const limitY = fastdom.measure(() => (touchRef.current?.offsetTop || 0))();
 
         // Move card to limit position
@@ -52,7 +54,6 @@ function SwipeCard({ children, onTop, onBottom, progress, onProgress }: IProps) 
             // Auto swipe to the limit position
             fastdom.mutate(() => {
                 if(!touchRef.current) return
-                console.log(`translate(0px, ${limitY * Math.sign(progress)}px)`)
                 touchRef.current.style.transform = `translate(0px, ${(limitY - 40) * Math.sign(progress)}px)`;
                 touchRef.current.style.cursor = `grabbing`;
             });

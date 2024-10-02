@@ -48,7 +48,7 @@ function Main({ id }: IProps) {
         setTimeout(async () => {
             setShowHateEffect(false);
 
-            return;
+            // return;
             if(!targetUser) return;
 
             // Send request to rate the user
@@ -66,7 +66,7 @@ function Main({ id }: IProps) {
         setTimeout(async () => {
             setShowLikeEffect(false);
 
-            return;
+            // return;
             if(!targetUser) return;
 
             // Send request to rate the user
