@@ -69,7 +69,7 @@ export class UserService {
      * Return all user info by vkUserId.
      * @param vkUserId
      */
-    async getUserById(vkUserId: number) {
+    async getUserById(vkUserId: string | number) {
         this.isLoading = true;
 
         try {
@@ -84,5 +84,10 @@ export class UserService {
     async getAllUsers() {
         const response = await http.get<void, User[]>("/users");
         return response.data;
+    }
+
+    async getUserFriends() {
+        const result = await bridge.send('VKWebAppGetFriends')
+        return result.users ?? [];
     }
 }
