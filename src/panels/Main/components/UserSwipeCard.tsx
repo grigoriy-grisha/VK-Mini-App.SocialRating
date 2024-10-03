@@ -23,6 +23,8 @@ export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({
     onHate
 }) => {
 
+    if(!user) return null;
+
     return (
         <SwipeCard
             progress={progress}
