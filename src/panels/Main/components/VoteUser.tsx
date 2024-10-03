@@ -42,13 +42,13 @@ function VoteUser({ user }: IProps) {
                 <Div className="grid gap-4 grid-cols-3">
                     <Tappable
                         className="rounded-xl flex items-center bg-red-900 justify-center"
-                        onClick={() => socialRatingService.hate()}
+                        // onClick={() => socialRatingService.hate()}
                     >
                         <Icon36CancelOutline />
                     </Tappable>
                     <Tappable
                         className="rounded-xl flex items-center bg-gray-500 justify-center"
-                        onClick={() => socialRatingService.ignore()}
+                        // onClick={() => socialRatingService.ignore()}
                     >
                         <Icon48HideOutline
                             width={36}
@@ -57,7 +57,7 @@ function VoteUser({ user }: IProps) {
                     </Tappable>
                     <Tappable
                         className="rounded-xl flex items-center bg-green-900 justify-center"
-                        onClick={() => socialRatingService.like()}
+                        // onClick={() => socialRatingService.like()}
                     >
                         <Icon36Done />
                     </Tappable>
