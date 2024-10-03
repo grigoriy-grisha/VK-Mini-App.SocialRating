@@ -39,16 +39,23 @@ function SwipeCard({ children, onTop, onBottom, progress, onProgress }: IProps) 
         });
     };
 
-    // When user release the card
+    // When a user releases the card
+    const hasEnded = React.useRef(false);
     const onEnd = (e: any) => {
+        if(hasEnded.current) return;
+        hasEnded.current = true;
+
         // Calculate limit position
         const limitY = fastdom.measure(() => (touchRef.current?.offsetTop || 0))();
 
         // Move card to limit position
         if(Math.abs(progress) > 0.5) {
+            console.log('here')
+            // Tell parent about swipe direction
             if(Math.sign(progress) > 0) onBottom();
             else onTop();
 
+            // tell parent about progress (1 or -1)
             onProgress(Math.sign(progress));
 
             // Auto swipe to the limit position
@@ -63,6 +70,7 @@ function SwipeCard({ children, onTop, onBottom, progress, onProgress }: IProps) 
         setTimeout(() => {
             // Tell parent about swipe progress
             onProgress(0);
+            hasEnded.current = false;
 
             fastdom.mutate(() => {
                 if(!touchRef.current) return;

@@ -20,11 +20,19 @@ export class SocialRatingService {
         }
     }
 
+    decrementVotes() {
+        const user = this.userService.user
+        if(user) user.votes--;
+    }
+
     async like(targetUserId: string) {
         const likeResponse = await http.post<void, User | null>(
             `/social-rating/${targetUserId}/like`,
         );
-        console.log(likeResponse);
+
+        // Decrement votes
+        if(likeResponse.result) this.decrementVotes();
+
         return likeResponse;
     }
 
@@ -32,7 +40,10 @@ export class SocialRatingService {
         const hateResponse = await http.post<void, User | null>(
             `/social-rating/${targetUserId}/hate`,
         );
-        console.log(hateResponse);
+
+        // Decrement votes
+        if(hateResponse.result) this.decrementVotes();
+
         return hateResponse;
     }
 

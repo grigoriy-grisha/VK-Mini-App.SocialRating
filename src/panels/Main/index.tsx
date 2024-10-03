@@ -14,6 +14,7 @@ import { HateEffect } from "@panels/Main/components/HateEffect.tsx";
 import { User } from "@/entity/user.ts";
 import { VideoBg } from "@components/VideoBG/VideoBG.tsx";
 import { useBlink } from "@hooks/useBlink.ts";
+import { VotesCount } from "@components/VotesCount";
 
 interface IProps {
     id: string;
@@ -37,6 +38,7 @@ function Main({ id }: IProps) {
     }, []);
 
     const authUser = userService.user;
+    const authUserVotesCount = authUser?.votes || 0;
 
     const [showHateEffect, setShowHateEffect] = useState(false);
     const [showLikeEffect, setShowLikeEffect] = useState(false);
@@ -124,6 +126,13 @@ function Main({ id }: IProps) {
                             </div>
                         </ErrorMessage>
                 }
+
+                <div className={twJoin(
+                    "absolute bottom-10 transition-opacity duration-200",
+                    progress != 0 ? "opacity-0" : "opacity-100",
+                )}>
+                    <VotesCount votesCount={authUserVotesCount}/>
+                </div>
 
             </div>
 
