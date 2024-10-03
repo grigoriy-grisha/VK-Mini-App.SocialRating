@@ -1,7 +1,23 @@
 .hate-effect {
     .hate-rating-text {
-        color: #CB2121;
-        background: linear-gradient(180deg, #FFB7B7 0%, #CB2121 100%);
+        color: #CD88ED;
+        background: linear-gradient(90.05deg, #7B27C6 -11.16%, #CD88ED 11.06%, #FF1E71 61.62%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        font-family: "VK Sans Display";
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 40px;
+        text-align: left;
+
+    }
+}
+
+.like-effect {
+    .like-rating-text {
+        color: transparent;
+        background: conic-gradient(from 90deg at 50% 50%, #B6D0F7 0deg, #C5C1F9 72deg, #FAFCFE 144deg, #BFF6F9 216deg, #CCBAE4 288deg, #B6D0F7 360deg);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
 

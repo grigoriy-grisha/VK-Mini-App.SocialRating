@@ -15,6 +15,7 @@ import { User } from "@/entity/user.ts";
 import { VideoBg } from "@components/VideoBG/VideoBG.tsx";
 import { useBlink } from "@hooks/useBlink.ts";
 import { VotesCount } from "@components/VotesCount";
+import { LikeEffect } from "@panels/Main/components/LikeEffect.tsx";
 
 interface IProps {
     id: string;
@@ -110,6 +111,7 @@ function Main({ id }: IProps) {
                 </div>}
 
                 <HateEffect show={showHateEffect} />
+                {/*<HateEffect show={true} />*/}
 
                 {
                     targetUser
@@ -127,6 +129,11 @@ function Main({ id }: IProps) {
                         </ErrorMessage>
                 }
 
+                {/*<LikeEffect show={true} />*/}
+                <LikeEffect show={showLikeEffect} />
+
+
+                {/* Display votes count (and hide when swipe) */}
                 <div className={twJoin(
                     "absolute bottom-10 transition-opacity duration-200",
                     progress != 0 ? "opacity-0" : "opacity-100",

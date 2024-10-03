@@ -46,12 +46,12 @@ export const BottomNavigation = () => {
 
             <svg xmlns="http://www.w3.org/2000/svg" width="388" height="200" viewBox="0 0 388 200" fill="none">
                 <g filter="url(#filter0_d_2630_787)">
-                    <path id="bottom-navigation-clip-path" fill-rule="evenodd" clip-rule="evenodd" d="M101.756 99.2535C114.436 102.13 126.861 107.509 139.864 107.509H351.289C365.489 107.509 377 119.02 377 133.22V151C377 170.882 360.882 187 341 187H46C26.1177 187 10 170.882 10 151V133.22C10 119.02 21.5112 107.509 35.711 107.509H41.0987C54.1014 107.509 66.5264 102.13 79.2069 99.2535C82.8166 98.4347 86.5932 98 90.4813 98C94.3694 98 98.146 98.4347 101.756 99.2535Z" fill="url(#paint0_linear_2630_787)"/>
+                    <path id="bottom-navigation-clip-path" fillRule="evenodd" clipRule="evenodd" d="M101.756 99.2535C114.436 102.13 126.861 107.509 139.864 107.509H351.289C365.489 107.509 377 119.02 377 133.22V151C377 170.882 360.882 187 341 187H46C26.1177 187 10 170.882 10 151V133.22C10 119.02 21.5112 107.509 35.711 107.509H41.0987C54.1014 107.509 66.5264 102.13 79.2069 99.2535C82.8166 98.4347 86.5932 98 90.4813 98C94.3694 98 98.146 98.4347 101.756 99.2535Z" fill="url(#paint0_linear_2630_787)"/>
                 </g>
                 <defs>
                     <linearGradient id="paint0_linear_2630_787" x1="10" y1="141.5" x2="377" y2="141.5" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#3C397E"/>
-                        <stop offset="1" stop-color="#0A0A1B"/>
+                        <stop stopColor="#3C397E"/>
+                        <stop offset="1" stopColor="#0A0A1B"/>
                     </linearGradient>
                 </defs>
             </svg>

@@ -13,13 +13,13 @@ export const UsersIconDefault = () => (
             </filter>
             <radialGradient id="paint0_angular_2749_885" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(20 14) scale(20 14)">
                 <stop stopColor="#B6D0F7"/>
-                <stop offset="0.15" stop-color="#EEF4E1"/>
-                <stop offset="0.3" stop-color="#FAFCFE"/>
-                <stop offset="0.45" stop-color="#E2C1F9"/>
-                <stop offset="0.58" stop-color="#BFD1F9"/>
-                <stop offset="0.75" stop-color="#FAFCFE"/>
-                <stop offset="0.85" stop-color="#BAE4E2"/>
-                <stop offset="1" stop-color="#B6D0F7"/>
+                <stop offset="0.15" stopColor="#EEF4E1"/>
+                <stop offset="0.3" stopColor="#FAFCFE"/>
+                <stop offset="0.45" stopColor="#E2C1F9"/>
+                <stop offset="0.58" stopColor="#BFD1F9"/>
+                <stop offset="0.75" stopColor="#FAFCFE"/>
+                <stop offset="0.85" stopColor="#BAE4E2"/>
+                <stop offset="1" stopColor="#B6D0F7"/>
             </radialGradient>
         </defs>
     </svg>
