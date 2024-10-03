@@ -34,7 +34,6 @@ function Main({ id }: IProps) {
 
     useEffect(() => {
         userService.getAuthUser();
-
         loadNextUser();
     }, []);
 
@@ -50,7 +49,6 @@ function Main({ id }: IProps) {
         setTimeout(async () => {
             setShowHateEffect(false);
 
-            // return;
             if(!targetUser) return;
 
             // Send request to rate the user
@@ -65,13 +63,11 @@ function Main({ id }: IProps) {
     }
 
     const onLike = async () => {
-
         setShowLikeEffect(true);
 
         setTimeout(async () => {
             setShowLikeEffect(false);
 
-            // return;
             if(!targetUser) return;
 
             // Send request to rate the user
@@ -111,7 +107,6 @@ function Main({ id }: IProps) {
                 </div>}
 
                 <HateEffect show={showHateEffect} />
-                {/*<HateEffect show={true} />*/}
 
                 {
                     targetUser
@@ -129,9 +124,7 @@ function Main({ id }: IProps) {
                         </ErrorMessage>
                 }
 
-                {/*<LikeEffect show={true} />*/}
                 <LikeEffect show={showLikeEffect} />
-
 
                 {/* Display votes count (and hide when swipe) */}
                 <div className={twJoin(

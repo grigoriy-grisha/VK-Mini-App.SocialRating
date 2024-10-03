@@ -60,7 +60,7 @@ function Leaderboard({ id }: IProps) {
 
             <Spacing size={10} />
 
-            <div className="overflow-y-auto w-full h-max z-10 pb-10 no-scrollbar">
+            <div className="relative overflow-y-auto w-full h-max z-10 pb-10 no-scrollbar">
                 <UserList users={users} />
             </div>
 

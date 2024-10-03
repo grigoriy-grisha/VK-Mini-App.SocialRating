@@ -30,14 +30,6 @@ export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({
             progress={progress}
             onProgress={(progress) => {
                 setProgress(progress);
-
-                // if (progress > 0.5)
-                //     return document.documentElement.classList.add("dislike-theme");
-                // if (progress < -0.5)
-                //     return document.documentElement.classList.add("like-theme");
-                //
-                // document.documentElement.classList.remove("like-theme");
-                // document.documentElement.classList.remove("dislike-theme");
             }}
             onTop={onLike}
             onBottom={onHate}

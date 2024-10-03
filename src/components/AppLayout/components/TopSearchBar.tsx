@@ -98,14 +98,14 @@ export const TopSearchBar: FC<TopSearchBarProps> = memo(({ children }) => {
     return (
         <div
             className={twJoin(
-                "absolute top-0 flex justify-between items-center w-full z-20",
+                "absolute top-0 flex justify-between items-center w-full z-20 pointer-events-none",
                 "py-5 px-3"
             )}
         >
             {/* Back */}
             <button
                 onClick={() => routeNavigator.back()}
-                className="flex p-5 mr-2.5 hover:scale-110 origin-center transition-transform will-change-transform"
+                className="flex p-5 mr-2.5 hover:scale-110 origin-center transition-transform will-change-transform pointer-events-auto"
             >
                 <img
                     src={backIcon}
@@ -131,7 +131,7 @@ export const TopSearchBar: FC<TopSearchBarProps> = memo(({ children }) => {
             }
 
             {/*  Search  */}
-            <div className="w-full" ref={searchContainerRef}>
+            <div className="w-full pointer-events-auto" ref={searchContainerRef}>
                 <div
                     className="p-5 relative w-full h-max"
                 >
@@ -166,7 +166,7 @@ export const TopSearchBar: FC<TopSearchBarProps> = memo(({ children }) => {
                     className={twJoin(
                         "absolute px-5 top-20 bg-white/30 backdrop-blur-xl left-5 right-5 z-10 rounded-2xl shadow-[0px_100px_100px_50px_rgba(10,10,50,0.6)]",
                         "transition-all duration-100 ease-in h-max overflow-y-scroll no-scrollbar",
-                        isSearchBarActive ? "h-[450px] max-h-[450px] py-5 opacity-100 delay-300" : "max-h-0 h-0 opacity-100",
+                        isSearchBarActive ? "h-[450px] max-h-[450px] py-5 opacity-100 delay-300" : "max-h-0 h-0 opacity-0 pointer-events-none",
                         "flex flex-col gap-5"
                     )}
                 >
