@@ -9,8 +9,8 @@ export interface ResponseHTTP<R> {
 }
 
 class Http {
-    baseUrl = "http://localhost:3000/api/v1";
-    // baseUrl = "https://sr-server.b-44.team/api/v1";
+    // baseUrl = "http://localhost:3000/api/v1";
+    baseUrl = "https://sr-server.b-44.team/api/v1";
 
     async post<T, R>(path: string, body?: T): Promise<ResponseHTTP<R>> {
         const response = await fetch(this.baseUrl + path, {
