@@ -64,7 +64,7 @@ export const UserList: FC<TopUsersProps> = memo(({
                                 className=""
                                 style={{ fontSize: '12px', fontWeight: 400, color: '#8d8d8f' }}
                             >
-                                Рейтинг: {user.social_rating.total}
+                                Рейтинг: {user.social_rating?.total || 0}
                             </div>
                         </div>
 

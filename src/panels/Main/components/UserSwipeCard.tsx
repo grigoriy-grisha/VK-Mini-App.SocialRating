@@ -69,7 +69,7 @@ export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({
                             className="holo-font rating flex items-center gap-1"
                             style={{ fontSize: '23px', fontWeight: 700 }}
                         >
-                            {getRatingNumber(progress, user.social_rating.total)} {getRatingIcon(progress)}
+                            {getRatingNumber(progress, user.social_rating?.total || 0)} {getRatingIcon(progress)}
                         </span>
 
                         <div
