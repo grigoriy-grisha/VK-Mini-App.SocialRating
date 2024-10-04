@@ -32,9 +32,11 @@ const ParticleEffect = ({
                 fullScreen: { enable: false },
                 smooth    : true,
                 duration  : 500,
+                fps_limit : 30,
                 particles : {
                     number: {
-                        value  : 30, // Particles count
+                        value : 30, // Particles count
+                        limit : 30
                     },
                     //  Image is a particle
                     shape  : {
@@ -53,12 +55,12 @@ const ParticleEffect = ({
                     },
                     move   : {
                         enable   : true,
-                        speed    : 8, // Move speed
-                        vibrate  : true,
+                        speed    : 2, // Move speed
+                        vibrate  : false,
                         direction: "outside", // Move direction
                         out_mode : "out",
 
-                        collisions: true,
+                        collisions: false,
 
                         // Particles generation position
                         center: particlePosition
@@ -70,7 +72,7 @@ const ParticleEffect = ({
                             speed      : 2,
                             opacity_min: 0.6,
                             startValue : "min",
-                            sync       : false,
+                            sync       : true,
                             mode       : "decrease"
                         },
                     },
@@ -82,14 +84,14 @@ const ParticleEffect = ({
                         },
                         animation: {
                             enable: true,
-                            speed : 3,
+                            speed : 0.5,
                         },
                         direction: "random",
                     },
                 },
 
                 autoPlay     : true,
-                retina_detect: true,
+                // retina_detect: true,
             }}
         />
     );

@@ -129,6 +129,7 @@ function Main({ id }: IProps) {
                 {/* Display votes count (and hide when swipe) */}
                 <div className={twJoin(
                     "absolute bottom-10 transition-opacity duration-200",
+                    "will-change-auto",
                     progress != 0 ? "opacity-0" : "opacity-100",
                 )}>
                     <VotesCount votesCount={authUserVotesCount}/>
