@@ -22,7 +22,7 @@ export interface User extends UserInfo {
     referrer: User | null;
     referrals: User[];
 
-    photo_base: string;
+    photo_base?: string;
 }
 
 export interface SocialRatingUser {
