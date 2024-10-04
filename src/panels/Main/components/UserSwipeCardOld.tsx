@@ -75,7 +75,7 @@ export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({
                         <div
                             className="w-full min-h-[93px]"
                             style={{
-                                fontSize  : Math.max(user.first_name.length, user.last_name.length) > 10 ? '28' : '36px',
+                                fontSize  : Math.max(user.first_name?.length, user.last_name?.length) > 10 ? '28' : '36px',
                                 fontWeight: 700,
                                 lineHeight: '33px'
                             }}
