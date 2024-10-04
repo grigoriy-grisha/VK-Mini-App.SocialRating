@@ -59,7 +59,7 @@ export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({
                             width       : "100%",
                             boxShadow   : "0px 4px 4px 0px rgba(0, 0, 0, 0.35)",
                         }}
-                        src={user.photo_max_orig}
+                        src={user.photo_base}
                         alt={user.first_name}
                     />
 
@@ -77,7 +77,7 @@ export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({
                         <div
                             className="w-full min-h-[93px]"
                             style={{
-                                // fontSize  : Math.max(user.first_name?.length, user.last_name.length) > 10 ? '28' : '36px',
+                                fontSize  : Math.max(user.first_name.length, user.last_name.length) > 10 ? '28' : '36px',
                                 fontWeight: 700,
                                 lineHeight: '33px'
                             }}
