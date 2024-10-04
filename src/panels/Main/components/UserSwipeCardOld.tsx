@@ -24,6 +24,8 @@ export const UserSwipeCard: FC<UserSwipeCardProps> = memo(({
 
     if(!user) return;
 
+    console.log(user);
+
     return (
         <SwipeCard
             progress={progress}
