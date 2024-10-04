@@ -25,6 +25,8 @@ export const UserList: FC<TopUsersProps> = memo(({
     return (
         <ul className="relative flex flex-col w-full px-1.5 text-white z-10">
             {users.map((user, i) => {
+                if(!user) return null;
+
                 return (
                     <li
                         key={user.uid}

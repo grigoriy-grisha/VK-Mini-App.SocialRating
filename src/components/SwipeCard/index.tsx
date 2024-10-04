@@ -80,6 +80,8 @@ function SwipeCard({ children, onTop, onBottom, progress, onProgress }: IProps) 
         }, Math.abs(progress) > 0.5 ? 1500 : 10);
     };
 
+    console.log(123)
+
     return (
         <Touch
             style={{
