@@ -98,7 +98,7 @@ function Main({ id }: IProps) {
 
                 <VideoBg />
 
-                {infoMessage && <div className="absolute bottom-20 w-full">
+                {infoMessage && <div className="absolute bg-black/25 pointer-events-none w-full h-full z-50">
                     <ErrorMessage>
                         <div className="w-10/12 mx-auto p-1 rounded-2xl bg-indigo-400/20 backdrop-blur-sm text-xsm text-balance">
                             <span className="holo-font">{infoMessage}</span>
