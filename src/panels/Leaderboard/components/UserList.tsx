@@ -78,7 +78,8 @@ export const UserList: FC<TopUsersProps> = memo(({
 
                         {user.hasWon &&(
                             <img
-                                src="/logo.svg"
+                                className="h-3/5"
+                                src="/rating/wreath.png"
                                 alt="🎁"
                             />
                         )}
